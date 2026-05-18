@@ -9,14 +9,27 @@
 <style>
   :root {
     --bg: #080C17;
+    --bg2: #0D1220;
     --gold: #C8A96A;
     --teal: #3D9B8C;
     --text: #EDE8DC;
     --muted: #6B7494;
     --border: rgba(255,255,255,0.07);
+    --shadow: rgba(0,0,0,0.4);
     --serif: 'DM Serif Display', Georgia, serif;
     --sans: 'DM Sans', sans-serif;
     --mono: 'JetBrains Mono', monospace;
+  }
+
+  [data-theme="light"] {
+    --bg: #F4F1EA;
+    --bg2: #EDE9DF;
+    --gold: #9A7A3A;
+    --teal: #2A7A6E;
+    --text: #1A1F35;
+    --muted: #7A8299;
+    --border: rgba(0,0,0,0.09);
+    --shadow: rgba(0,0,0,0.08);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,296 +42,172 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
   }
 
-  /* NOISE */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.35;
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 100; opacity: 0.3;
   }
 
-  /* GRID BACKGROUND */
   body::after {
     content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    position: fixed; inset: 0;
+    background-image: linear-gradient(var(--border) 1px,transparent 1px), linear-gradient(90deg,var(--border) 1px,transparent 1px);
     background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
 
-  /* NAV */
   nav {
-    position: relative;
-    z-index: 10;
-    padding: 1.5rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: relative; z-index: 10;
+    padding: 1.25rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid var(--border);
   }
 
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    color: var(--gold);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
+  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 28px; }
+
+  .nav-logo img { height: 28px; width: auto; display: block; transition: filter 0.4s; }
+
+  .logo-fallback {
+    font-family: var(--mono); font-size: 0.78rem;
+    color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase;
+    display: none;
   }
 
-  .nav-right {
-    font-family: var(--mono);
-    font-size: 0.65rem;
+  .nav-right { display: flex; align-items: center; gap: 1.25rem; }
+
+  .nav-meta {
+    font-family: var(--mono); font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  .theme-btn {
+    background: none;
+    border: 1px solid var(--border);
     color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-family: var(--mono); font-size: 0.58rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; cursor: pointer; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
   }
+  .theme-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* MAIN */
   main {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
     padding: 4rem 2.5rem;
-    max-width: 860px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    z-index: 1;
+    max-width: 820px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 1;
   }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--teal);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    font-family: var(--mono); font-size: 0.68rem;
+    color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase;
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.1s forwards;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
   }
-
-  .eyebrow::before {
-    content: '';
-    width: 28px;
-    height: 1px;
-    background: var(--teal);
-  }
+  .eyebrow::before { content:''; width:28px; height:1px; background:var(--teal); }
 
   h1 {
     font-family: var(--serif);
-    font-size: clamp(2.5rem, 6vw, 4.8rem);
-    line-height: 1.1;
-    font-weight: 400;
+    font-size: clamp(2.3rem,5.5vw,4.3rem);
+    line-height: 1.1; font-weight: 400;
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.25s forwards;
+    opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
   }
-
-  h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  h1 em { font-style: italic; color: var(--gold); }
 
   .descriptor {
-    font-size: 1rem;
-    color: var(--muted);
-    max-width: 520px;
-    line-height: 1.8;
-    margin-bottom: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.4s forwards;
+    font-size: 0.96rem; color: var(--muted);
+    max-width: 490px; line-height: 1.85; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
   }
 
-  /* LINKS */
   .links {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    width: 100%;
-    max-width: 480px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.55s forwards;
+    display: flex; flex-direction: column; gap: 1px;
+    width: 100%; max-width: 460px;
+    opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
   }
 
   .link-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 1.5rem;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    background: var(--bg2); border: 1px solid var(--border);
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
-
   .link-item::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--gold);
-    transform: scaleY(0);
-    transition: transform 0.2s;
+    content: ''; position: absolute; left:0; top:0; bottom:0;
+    width: 2px; background: var(--gold);
+    transform: scaleY(0); transition: transform 0.25s;
   }
-
   .link-item.teal::before { background: var(--teal); }
-
-  .link-item:hover {
-    background: rgba(255,255,255,0.04);
-    border-color: rgba(255,255,255,0.12);
-  }
-
+  .link-item:hover { border-color: rgba(200,169,106,0.2); box-shadow: 0 4px 20px var(--shadow); }
   .link-item:hover::before { transform: scaleY(1); }
 
-  .link-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .link-name {
-    font-family: var(--serif);
-    font-size: 1.05rem;
-    color: var(--text);
-    font-weight: 400;
-  }
-
-  .link-sub {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .link-arrow {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    transition: color 0.2s, transform 0.2s;
-  }
-
-  .link-item:hover .link-arrow {
-    color: var(--gold);
-    transform: translateX(4px);
-  }
-
+  .link-left { display: flex; flex-direction: column; gap: 0.2rem; }
+  .link-name { font-family: var(--serif); font-size: 1.05rem; color: var(--text); }
+  .link-sub { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .link-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); transition: color 0.2s, transform 0.2s; }
+  .link-item:hover .link-arrow { color: var(--gold); transform: translateX(4px); }
   .link-item.teal:hover .link-arrow { color: var(--teal); }
 
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    padding: 1.5rem 2.5rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .footer-left {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .footer-right {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-right a {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .footer-right a:hover { color: var(--gold); }
-
-  /* REGISTRY BADGE */
   .registry {
     margin-top: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.7s forwards;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    display: flex; align-items: center; gap: 0.85rem;
+    opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
   }
-
-  .registry-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--teal);
-    animation: pulse 2s infinite;
-    flex-shrink: 0;
-  }
-
-  .registry-text {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    line-height: 1.6;
-  }
-
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--teal); animation: pulse 2s infinite; flex-shrink:0; }
+  .registry-text { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; line-height: 1.7; }
   .registry-text span { color: var(--teal); }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.4); }
+  footer {
+    position: relative; z-index: 1;
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
   }
+  .footer-l { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+  .footer-r { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-r a { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .footer-r a:hover { color: var(--gold); }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
 
-  @media (max-width: 580px) {
-    nav, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
-    .link-item { padding: 1rem 1.25rem; }
+  @media(max-width:580px) {
+    nav,main,footer { padding-left:1.25rem; padding-right:1.25rem; }
+    .nav-meta { display:none; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">LedeLab.group</a>
-  <span class="nav-right">Registry 14513358 · Tallinn, Estonia</span>
+  <a href="/" class="nav-logo">
+    <img
+      id="logo-img"
+      src="https://drive.google.com/uc?export=view&id=1WsZn_Y5oj4eVJ0hsp12-_61TLE2OaUdQ"
+      alt="LedeLab Group"
+      onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block';"
+    >
+    <span class="logo-fallback">LEDELAB</span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-meta">Registry 14513358 · Tallinn, EE</span>
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀ Day</button>
+  </div>
 </nav>
 
 <main>
   <p class="eyebrow">Technology for social impact</p>
-
   <h1>Building bridges<br>between <em>Latin America</em><br>and Europe.</h1>
-
-  <p class="descriptor">
-    LedeLab Group OÜ develops conversational AI infrastructure and behavioral design technology for social impact projects in health, education and sustainability.
-  </p>
+  <p class="descriptor">LedeLab Group OÜ develops conversational AI infrastructure and behavioral design technology for social impact projects in health, education and sustainability.</p>
 
   <div class="links">
     <a href="/leonardo" class="link-item">
@@ -328,7 +217,6 @@
       </div>
       <span class="link-arrow">→</span>
     </a>
-
     <a href="https://bienestar360.co" class="link-item teal" target="_blank">
       <div class="link-left">
         <span class="link-name">Bienestar 360</span>
@@ -336,7 +224,6 @@
       </div>
       <span class="link-arrow">→</span>
     </a>
-
     <a href="mailto:leonardo@ledelab.group" class="link-item">
       <div class="link-left">
         <span class="link-name">Contact</span>
@@ -347,7 +234,7 @@
   </div>
 
   <div class="registry">
-    <div class="registry-dot"></div>
+    <div class="dot"></div>
     <div class="registry-text">
       Registered in Estonia · <span>e-Residency program</span> since 2018<br>
       EIC Accelerator applicant · September 2026
@@ -356,8 +243,8 @@
 </main>
 
 <footer>
-  <span class="footer-left">LedeLab Group OÜ · © 2026</span>
-  <div class="footer-right">
+  <span class="footer-l">LedeLab Group OÜ · © 2026</span>
+  <div class="footer-r">
     <a href="/leonardo">About</a>
     <a href="https://bienestar360.co" target="_blank">Bienestar 360</a>
     <a href="https://www.linkedin.com/company/ledelab" target="_blank">LinkedIn</a>
@@ -365,5 +252,33 @@
   </div>
 </footer>
 
+<script>
+  // Auto-detect day/night by local hour
+  // Day 7am–8pm = light · Night = dark
+  const h = new Date().getHours();
+  let theme = (h >= 7 && h < 20) ? 'light' : 'dark';
+
+  function applyTheme(t) {
+    const btn = document.getElementById('theme-btn');
+    const logo = document.getElementById('logo-img');
+    if (t === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      btn.textContent = '☾ Night';
+      if (logo) logo.style.filter = 'none';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      btn.textContent = '☀ Day';
+      // White logo on dark background
+      if (logo) logo.style.filter = 'brightness(0) invert(1)';
+    }
+    theme = t;
+  }
+
+  function toggleTheme() {
+    applyTheme(theme === 'dark' ? 'light' : 'dark');
+  }
+
+  applyTheme(theme);
+</script>
 </body>
 </html>

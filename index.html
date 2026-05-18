@@ -6,227 +6,109 @@
 <title>LedeLab Group OÜ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  /* ── Apply before paint — no flash ── */
+  (function(){
+    var h = new Date().getHours();
+    var t = localStorage.getItem('ll-theme') || ((h>=7&&h<20)?'light':'dark');
+    if(t==='light') document.documentElement.setAttribute('data-theme','light');
+    var bl = (navigator.language||'en').toLowerCase();
+    var l = localStorage.getItem('ll-lang') || (bl.startsWith('es')?'es':'en');
+    document.documentElement.setAttribute('lang',l);
+    document.documentElement.setAttribute('data-lang',l);
+  })();
+</script>
 <style>
-  :root {
-    --bg: #080C17;
-    --bg2: #0D1220;
-    --gold: #C8A96A;
-    --teal: #3D9B8C;
-    --text: #EDE8DC;
-    --muted: #6B7494;
-    --border: rgba(255,255,255,0.07);
-    --shadow: rgba(0,0,0,0.4);
-    --serif: 'DM Serif Display', Georgia, serif;
-    --sans: 'DM Sans', sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
-
-  [data-theme="light"] {
-    --bg: #F4F1EA;
-    --bg2: #EDE9DF;
-    --gold: #9A7A3A;
-    --teal: #2A7A6E;
-    --text: #1A1F35;
-    --muted: #7A8299;
-    --border: rgba(0,0,0,0.09);
-    --shadow: rgba(0,0,0,0.08);
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    transition: background 0.5s, color 0.5s;
-  }
-
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 100; opacity: 0.3;
-  }
-
-  body::after {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: linear-gradient(var(--border) 1px,transparent 1px), linear-gradient(90deg,var(--border) 1px,transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none; z-index: 0;
-  }
-
-  nav {
-    position: relative; z-index: 10;
-    padding: 1.25rem 2.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo { display: flex; align-items: center; text-decoration: none; height: 28px; }
-
-  .nav-logo img { height: 28px; width: auto; display: block; transition: filter 0.4s; }
-
-  .logo-fallback {
-    font-family: var(--mono); font-size: 0.78rem;
-    color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase;
-    display: none;
-  }
-
-  .nav-right { display: flex; align-items: center; gap: 1.25rem; }
-
-  .nav-meta {
-    font-family: var(--mono); font-size: 0.6rem;
-    color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase;
-  }
-
-  .theme-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: var(--mono); font-size: 0.58rem;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.3rem 0.7rem; cursor: pointer; border-radius: 2px;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .theme-btn:hover { border-color: var(--gold); color: var(--gold); }
-
-  main {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-    padding: 4rem 2.5rem;
-    max-width: 820px; margin: 0 auto; width: 100%;
-    position: relative; z-index: 1;
-  }
-
-  .eyebrow {
-    font-family: var(--mono); font-size: 0.68rem;
-    color: var(--teal); letter-spacing: 0.2em; text-transform: uppercase;
-    margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    opacity: 0; animation: fadeUp 0.7s 0.1s forwards;
-  }
-  .eyebrow::before { content:''; width:28px; height:1px; background:var(--teal); }
-
-  h1 {
-    font-family: var(--serif);
-    font-size: clamp(2.3rem,5.5vw,4.3rem);
-    line-height: 1.1; font-weight: 400;
-    margin-bottom: 2rem;
-    opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
-  }
-  h1 em { font-style: italic; color: var(--gold); }
-
-  .descriptor {
-    font-size: 0.96rem; color: var(--muted);
-    max-width: 490px; line-height: 1.85; margin-bottom: 3rem;
-    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
-  }
-
-  .links {
-    display: flex; flex-direction: column; gap: 1px;
-    width: 100%; max-width: 460px;
-    opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
-  }
-
-  .link-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 1.5rem;
-    background: var(--bg2); border: 1px solid var(--border);
-    text-decoration: none;
-    position: relative; overflow: hidden;
-    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-  }
-  .link-item::before {
-    content: ''; position: absolute; left:0; top:0; bottom:0;
-    width: 2px; background: var(--gold);
-    transform: scaleY(0); transition: transform 0.25s;
-  }
-  .link-item.teal::before { background: var(--teal); }
-  .link-item:hover { border-color: rgba(200,169,106,0.2); box-shadow: 0 4px 20px var(--shadow); }
-  .link-item:hover::before { transform: scaleY(1); }
-
-  .link-left { display: flex; flex-direction: column; gap: 0.2rem; }
-  .link-name { font-family: var(--serif); font-size: 1.05rem; color: var(--text); }
-  .link-sub { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-  .link-arrow { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); transition: color 0.2s, transform 0.2s; }
-  .link-item:hover .link-arrow { color: var(--gold); transform: translateX(4px); }
-  .link-item.teal:hover .link-arrow { color: var(--teal); }
-
-  .registry {
-    margin-top: 2.5rem;
-    display: flex; align-items: center; gap: 0.85rem;
-    opacity: 0; animation: fadeUp 0.7s 0.7s forwards;
-  }
-  .dot { width:6px; height:6px; border-radius:50%; background:var(--teal); animation: pulse 2s infinite; flex-shrink:0; }
-  .registry-text { font-family: var(--mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; line-height: 1.7; }
-  .registry-text span { color: var(--teal); }
-
-  footer {
-    position: relative; z-index: 1;
-    padding: 1.25rem 2.5rem;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
-  }
-  .footer-l { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-  .footer-r { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .footer-r a { font-family: var(--mono); font-size: 0.59rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-  .footer-r a:hover { color: var(--gold); }
-
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
-
-  @media(max-width:580px) {
-    nav,main,footer { padding-left:1.25rem; padding-right:1.25rem; }
-    .nav-meta { display:none; }
-  }
+  :root{--bg:#080C17;--bg2:#0D1220;--gold:#C8A96A;--teal:#3D9B8C;--text:#EDE8DC;--muted:#6B7494;--border:rgba(255,255,255,0.07);--shadow:rgba(0,0,0,0.4);--serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace}
+  [data-theme="light"]{--bg:#F4F1EA;--bg2:#EDE9DF;--gold:#9A7A3A;--teal:#2A7A6E;--text:#1A1F35;--muted:#7A8299;--border:rgba(0,0,0,0.09);--shadow:rgba(0,0,0,0.08)}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;transition:background .5s,color .5s}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:100;opacity:.3}
+  body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+  nav{position:relative;z-index:10;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;height:28px}
+  .nav-logo img{height:28px;width:auto;display:block;transition:filter .4s}
+  .logo-fallback{font-family:var(--mono);font-size:.78rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;display:none}
+  .nav-right{display:flex;align-items:center;gap:.75rem}
+  .nav-meta{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+  .ctrl{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;padding:.28rem .65rem;cursor:pointer;border-radius:2px;transition:border-color .2s,color .2s}
+  .ctrl:hover{border-color:var(--gold);color:var(--gold)}
+  .ctrl.on{border-color:var(--teal);color:var(--teal)}
+  .divdr{width:1px;height:14px;background:var(--border)}
+  main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4rem 2.5rem;max-width:820px;margin:0 auto;width:100%;position:relative;z-index:1}
+  .eyebrow{font-family:var(--mono);font-size:.68rem;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:.75rem;opacity:0;animation:fadeUp .7s .1s forwards}
+  .eyebrow::before{content:'';width:28px;height:1px;background:var(--teal)}
+  h1{font-family:var(--serif);font-size:clamp(2.3rem,5.5vw,4.3rem);line-height:1.1;font-weight:400;margin-bottom:2rem;opacity:0;animation:fadeUp .7s .25s forwards}
+  h1 em{font-style:italic;color:var(--gold)}
+  .descriptor{font-size:.96rem;color:var(--muted);max-width:490px;line-height:1.85;margin-bottom:3rem;opacity:0;animation:fadeUp .7s .4s forwards}
+  .links{display:flex;flex-direction:column;gap:1px;width:100%;max-width:460px;opacity:0;animation:fadeUp .7s .55s forwards}
+  .link-item{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;background:var(--bg2);border:1px solid var(--border);text-decoration:none;position:relative;overflow:hidden;transition:background .2s,border-color .2s,box-shadow .2s}
+  .link-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transition:transform .25s}
+  .link-item.teal::before{background:var(--teal)}
+  .link-item:hover{border-color:rgba(200,169,106,.2);box-shadow:0 4px 20px var(--shadow)}
+  .link-item:hover::before{transform:scaleY(1)}
+  .link-left{display:flex;flex-direction:column;gap:.2rem}
+  .link-name{font-family:var(--serif);font-size:1.05rem;color:var(--text)}
+  .link-sub{font-family:var(--mono);font-size:.59rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .link-arrow{font-family:var(--mono);font-size:.8rem;color:var(--muted);transition:color .2s,transform .2s}
+  .link-item:hover .link-arrow{color:var(--gold);transform:translateX(4px)}
+  .link-item.teal:hover .link-arrow{color:var(--teal)}
+  .registry{margin-top:2.5rem;display:flex;align-items:center;gap:.85rem;opacity:0;animation:fadeUp .7s .7s forwards}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;flex-shrink:0}
+  .reg-text{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:.1em;line-height:1.7}
+  .reg-text span{color:var(--teal)}
+  footer{position:relative;z-index:1;padding:1.25rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+  .footer-l{font-family:var(--mono);font-size:.59rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+  .footer-r{display:flex;gap:1.5rem;flex-wrap:wrap}
+  .footer-r a{font-family:var(--mono);font-size:.59rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+  .footer-r a:hover{color:var(--gold)}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.4)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media(max-width:580px){nav,main,footer{padding-left:1.25rem;padding-right:1.25rem}.nav-meta{display:none}}
 </style>
 </head>
 <body>
-
 <nav>
   <a href="/" class="nav-logo">
-    <img
-      id="logo-img"
-      src="https://drive.google.com/uc?export=view&id=1WsZn_Y5oj4eVJ0hsp12-_61TLE2OaUdQ"
-      alt="LedeLab Group"
-      onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block';"
-    >
+    <img id="logo-img" src="/assets/logo.svg" alt="LedeLab Group"
+      onerror="this.style.display='none';document.querySelector('.logo-fallback').style.display='block'">
     <span class="logo-fallback">LEDELAB</span>
   </a>
   <div class="nav-right">
     <span class="nav-meta">Registry 14513358 · Tallinn, EE</span>
-    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀ Day</button>
+    <button class="ctrl" id="btn-es" onclick="setLang('es')">ES</button>
+    <button class="ctrl" id="btn-en" onclick="setLang('en')">EN</button>
+    <div class="divdr"></div>
+    <button class="ctrl" id="btn-theme" onclick="toggleTheme()"></button>
   </div>
 </nav>
 
 <main>
-  <p class="eyebrow">Technology for social impact</p>
-  <h1>Building bridges<br>between <em>Latin America</em><br>and Europe.</h1>
-  <p class="descriptor">LedeLab Group OÜ develops conversational AI infrastructure and behavioral design technology for social impact projects in health, education and sustainability.</p>
+  <p class="eyebrow" data-en="Technology for social impact" data-es="Tecnología para el impacto social"></p>
+  <h1 data-en="Building bridges<br>between <em>Latin America</em><br>and Europe."
+      data-es="Construyendo puentes<br>entre <em>América Latina</em><br>y Europa."></h1>
+  <p class="descriptor"
+    data-en="LedeLab Group OÜ develops conversational AI infrastructure and behavioral design technology for social impact projects in health, education and sustainability."
+    data-es="LedeLab Group OÜ desarrolla infraestructura de IA conversacional y tecnología de diseño conductual para proyectos de impacto social en salud, educación y sostenibilidad."></p>
 
   <div class="links">
     <a href="/leonardo" class="link-item">
       <div class="link-left">
         <span class="link-name">Leonardo De la Hoz</span>
-        <span class="link-sub">Founder & CEO · Profile & portfolio</span>
+        <span class="link-sub" data-en="Founder & CEO · Profile & portfolio" data-es="Fundador y CEO · Perfil y portafolio"></span>
       </div>
       <span class="link-arrow">→</span>
     </a>
     <a href="https://bienestar360.co" class="link-item teal" target="_blank">
       <div class="link-left">
         <span class="link-name">Bienestar 360</span>
-        <span class="link-sub">Family wellness · Colombia · K-12</span>
+        <span class="link-sub" data-en="Family wellness · Colombia · K-12" data-es="Bienestar familiar · Colombia · K-12"></span>
       </div>
       <span class="link-arrow">→</span>
     </a>
     <a href="mailto:leonardo@ledelab.group" class="link-item">
       <div class="link-left">
-        <span class="link-name">Contact</span>
+        <span class="link-name" data-en="Contact" data-es="Contacto"></span>
         <span class="link-sub">leonardo@ledelab.group</span>
       </div>
       <span class="link-arrow">→</span>
@@ -235,50 +117,58 @@
 
   <div class="registry">
     <div class="dot"></div>
-    <div class="registry-text">
-      Registered in Estonia · <span>e-Residency program</span> since 2018<br>
-      EIC Accelerator applicant · September 2026
-    </div>
+    <div class="reg-text"
+      data-en="Registered in Estonia · <span>e-Residency program</span> since 2018<br>EIC Accelerator applicant · September 2026"
+      data-es="Registrada en Estonia · <span>programa e-Residency</span> desde 2018<br>Candidata EIC Accelerator · Septiembre 2026"></div>
   </div>
 </main>
 
 <footer>
   <span class="footer-l">LedeLab Group OÜ · © 2026</span>
   <div class="footer-r">
-    <a href="/leonardo">About</a>
+    <a href="/leonardo" data-en="About" data-es="Acerca de"></a>
     <a href="https://bienestar360.co" target="_blank">Bienestar 360</a>
     <a href="https://www.linkedin.com/company/ledelab" target="_blank">LinkedIn</a>
-    <a href="mailto:leonardo@ledelab.group">Contact</a>
+    <a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto"></a>
   </div>
 </footer>
 
 <script>
-  // Auto-detect day/night by local hour
-  // Day 7am–8pm = light · Night = dark
-  const h = new Date().getHours();
-  let theme = (h >= 7 && h < 20) ? 'light' : 'dark';
+  var h = new Date().getHours();
+  var bl = (navigator.language||'en').toLowerCase();
+  var currentTheme = localStorage.getItem('ll-theme') || ((h>=7&&h<20)?'light':'dark');
+  var currentLang  = localStorage.getItem('ll-lang')  || (bl.startsWith('es')?'es':'en');
 
-  function applyTheme(t) {
-    const btn = document.getElementById('theme-btn');
-    const logo = document.getElementById('logo-img');
-    if (t === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      btn.textContent = '☾ Night';
-      if (logo) logo.style.filter = 'none';
+  function applyTheme(t){
+    var btn=document.getElementById('btn-theme'), logo=document.getElementById('logo-img');
+    if(t==='light'){
+      document.documentElement.setAttribute('data-theme','light');
+      btn.textContent='☾';
+      if(logo) logo.style.filter='none';
     } else {
       document.documentElement.removeAttribute('data-theme');
-      btn.textContent = '☀ Day';
-      // White logo on dark background
-      if (logo) logo.style.filter = 'brightness(0) invert(1)';
+      btn.textContent='☀';
+      if(logo) logo.style.filter='brightness(0) invert(1)';
     }
-    theme = t;
+    currentTheme=t; localStorage.setItem('ll-theme',t);
   }
 
-  function toggleTheme() {
-    applyTheme(theme === 'dark' ? 'light' : 'dark');
+  function applyLang(l){
+    document.documentElement.setAttribute('lang',l);
+    document.documentElement.setAttribute('data-lang',l);
+    document.querySelectorAll('[data-en][data-es]').forEach(function(el){
+      var v=el.getAttribute('data-'+l); if(v!==null) el.innerHTML=v;
+    });
+    document.getElementById('btn-es').classList.toggle('on',l==='es');
+    document.getElementById('btn-en').classList.toggle('on',l==='en');
+    currentLang=l; localStorage.setItem('ll-lang',l);
   }
 
-  applyTheme(theme);
+  function toggleTheme(){ applyTheme(currentTheme==='dark'?'light':'dark'); }
+  function setLang(l){ applyLang(l); }
+
+  applyTheme(currentTheme);
+  applyLang(currentLang);
 </script>
 </body>
 </html>

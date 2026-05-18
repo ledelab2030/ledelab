@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LedeLab Group OÜ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C17;
+    --gold: #C8A96A;
+    --teal: #3D9B8C;
+    --text: #EDE8DC;
+    --muted: #6B7494;
+    --border: rgba(255,255,255,0.07);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* NOISE */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.35;
+  }
+
+  /* GRID BACKGROUND */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: relative;
+    z-index: 10;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-right {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4rem 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--teal);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .descriptor {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s forwards;
+  }
+
+  /* LINKS */
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    width: 100%;
+    max-width: 480px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s forwards;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .link-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+  }
+
+  .link-item.teal::before { background: var(--teal); }
+
+  .link-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .link-item:hover::before { transform: scaleY(1); }
+
+  .link-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .link-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .link-sub {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .link-arrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .link-item:hover .link-arrow {
+    color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .link-item.teal:hover .link-arrow { color: var(--teal); }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-right a {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-right a:hover { color: var(--gold); }
+
+  /* REGISTRY BADGE */
+  .registry {
+    margin-top: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.7s forwards;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .registry-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+    flex-shrink: 0;
+  }
+
+  .registry-text {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+  }
+
+  .registry-text span { color: var(--teal); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 580px) {
+    nav, main, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .link-item { padding: 1rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">LedeLab.group</a>
+  <span class="nav-right">Registry 14513358 · Tallinn, Estonia</span>
+</nav>
+
+<main>
+  <p class="eyebrow">Technology for social impact</p>
+
+  <h1>Building bridges<br>between <em>Latin America</em><br>and Europe.</h1>
+
+  <p class="descriptor">
+    LedeLab Group OÜ develops conversational AI infrastructure and behavioral design technology for social impact projects in health, education and sustainability.
+  </p>
+
+  <div class="links">
+    <a href="/leonardo" class="link-item">
+      <div class="link-left">
+        <span class="link-name">Leonardo De la Hoz</span>
+        <span class="link-sub">Founder & CEO · Profile & portfolio</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://bienestar360.co" class="link-item teal" target="_blank">
+      <div class="link-left">
+        <span class="link-name">Bienestar 360</span>
+        <span class="link-sub">Family wellness · Colombia · K-12</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="mailto:leonardo@ledelab.group" class="link-item">
+      <div class="link-left">
+        <span class="link-name">Contact</span>
+        <span class="link-sub">leonardo@ledelab.group</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="registry">
+    <div class="registry-dot"></div>
+    <div class="registry-text">
+      Registered in Estonia · <span>e-Residency program</span> since 2018<br>
+      EIC Accelerator applicant · September 2026
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-left">LedeLab Group OÜ · © 2026</span>
+  <div class="footer-right">
+    <a href="/leonardo">About</a>
+    <a href="https://bienestar360.co" target="_blank">Bienestar 360</a>
+    <a href="https://www.linkedin.com/company/ledelab" target="_blank">LinkedIn</a>
+    <a href="mailto:leonardo@ledelab.group">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

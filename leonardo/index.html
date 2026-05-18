@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leonardo De la Hoz Borrego · LedeLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080C17;
+    --bg2: #0D1220;
+    --gold: #C8A96A;
+    --gold-dim: rgba(200,169,106,0.15);
+    --teal: #3D9B8C;
+    --teal-dim: rgba(61,155,140,0.12);
+    --text: #EDE8DC;
+    --muted: #6B7494;
+    --border: rgba(255,255,255,0.07);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,12,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tag.gold { border-color: rgba(200,169,106,0.3); color: var(--gold); }
+  .tag.teal { border-color: rgba(61,155,140,0.3); color: var(--teal); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    display: block;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* MANIFIESTO */
+  .manifiesto {
+    border-left: 2px solid var(--gold);
+    padding: 2rem 0 2rem 2.5rem;
+    margin: 2rem 0;
+  }
+
+  .manifiesto p {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  .manifiesto p:last-child { margin-bottom: 0; }
+
+  .manifiesto em { color: var(--gold); font-style: italic; }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 2rem;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .tl-item.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tl-year {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-top: 0.35rem;
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+
+  .tl-content {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .tl-content::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.5rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--muted);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .tl-item.highlight .tl-content::before {
+    border-color: var(--gold);
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(200,169,106,0.4);
+  }
+
+  .tl-item.highlight .tl-year { color: var(--gold); }
+
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+  }
+
+  .tl-org {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .tl-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--gold-dim);
+    border: 1px solid rgba(200,169,106,0.2);
+    color: var(--gold);
+    border-radius: 2px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    margin-right: 0.4rem;
+  }
+
+  .tl-badge.teal {
+    background: var(--teal-dim);
+    border-color: rgba(61,155,140,0.2);
+    color: var(--teal);
+  }
+
+  /* PROJECTS GRID */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .project-card:hover { background: var(--bg2); }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-card.teal::after { background: var(--teal); }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .project-link {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .project-link.teal { color: var(--teal); }
+  .project-link::after { content: '→'; }
+
+  /* PATENTS */
+  .patents-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .patent-item {
+    background: var(--bg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+
+  .patent-item:hover { background: var(--bg2); }
+
+  .patent-icon {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    padding-top: 0.1rem;
+    white-space: nowrap;
+  }
+
+  .patent-text {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* STATS BAR */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+
+  .stat-item {
+    background: var(--bg);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+    gap: 1rem;
+  }
+
+  footer .f-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  footer .f-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  footer a {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--gold); }
+
+  footer .f-right {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin: 0 2rem;
+  }
+
+  /* LOCATION TAG */
+  .location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .location-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 1rem; }
+    .nav-links { display: none; }
+    .timeline::before { left: 60px; }
+    .tl-item { grid-template-columns: 60px 1fr; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    section { padding: 4rem 1.25rem; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://ledelab.group" class="nav-logo">LedeLab.group</a>
+  <ul class="nav-links">
+    <li><a href="#trayectoria">Trayectoria</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#manifiesto">Manifiesto</a></li>
+    <li><a href="mailto:leonardo@ledelab.group">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">ledelab.group / leonardo</p>
+  <h1>Leonardo<br>De la Hoz <em>Borrego</em></h1>
+  <p class="hero-sub">
+    Construyo desde la intersección entre tecnología, bienestar y educación. 
+    Barranquilla es donde apuesto. Estonia y Tartu me dan perspectiva.
+  </p>
+  <div class="hero-tags">
+    <span class="tag gold">LedeLab Group OÜ · Estonia</span>
+    <span class="tag teal">Bienestar 360 · Cofundador</span>
+    <span class="tag">e-Residente</span>
+    <span class="tag">MA EdTech · Tartu</span>
+    <span class="tag">MBA · Bologna</span>
+  </div>
+  <div class="location">
+    <span class="location-dot"></span>
+    Barranquilla, Colombia — activo
+  </div>
+  <p class="hero-scroll">Scroll para explorar</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<section>
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-num">32</div>
+      <div class="stat-label">Años construyendo empresa</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Patentes registradas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Idiomas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2018</div>
+      <div class="stat-label">Año · e-Residency Estonia</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">€2.5M</div>
+      <div class="stat-label">EIC Accelerator · objetivo 2026</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MANIFIESTO -->
+<section id="manifiesto">
+  <p class="section-label">Manifiesto</p>
+  <div class="manifiesto">
+    <p>No creo en el emprendimiento como fin. Creo en él como <em>vehículo para resolver cosas que importan</em>.</p>
+    <p>Llevo 32 años aprendiendo que las raíces y la perspectiva no se excluyen — <em>se potencian</em>.</p>
+    <p>Construir en Barranquilla con tecnología estonia, metodología italiana y respaldo académico estonio es mi forma de decir que <em>la periferia puede ser el centro</em>.</p>
+    <p>Lo que no se puede medir aún, se puede diseñar. Lo que no se puede diseñar aún, se puede imaginar. <em>Eso es suficiente para empezar</em>.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRAYECTORIA -->
+<section id="trayectoria">
+  <p class="section-label">Trayectoria</p>
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-year">1994</div>
+      <div class="tl-content">
+        <div class="tl-title">Las raíces</div>
+        <div class="tl-org">Grupo Protemad · Barranquilla</div>
+        <div class="tl-desc">Inicio en la empresa familiar a los 21 años. 32 años de construcción ininterrumpida en el Caribe colombiano — preservantes para madera, fungicidas, industria química. La escuela más duradera.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">1996</div>
+      <div class="tl-content">
+        <div class="tl-title">Primera apuesta propia</div>
+        <div class="tl-org">LedeLab Energy / Petrocaribe Ingeniería</div>
+        <div class="tl-desc">Primera empresa independiente a los 23 años. Energía, ingeniería, transición hacia soluciones sostenibles. El embrión de lo que hoy es LedeLab.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2001</div>
+      <div class="tl-content">
+        <div class="tl-title">Salida al mundo corporativo</div>
+        <div class="tl-org">Monómeros Colombo Venezolanos</div>
+        <div class="tl-desc">Ventas industriales en una de las empresas petroquímicas más grandes de Colombia. Cuatro años aprendiendo a operar a escala, gestión de grandes cuentas, disciplina comercial.</div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2012</div>
+      <div class="tl-content">
+        <div class="tl-title">Expansión a Miami</div>
+        <div class="tl-org">Protemad USA Corp</div>
+        <div class="tl-desc">Cuatro años como presidente de la operación en Miami, Florida. Primera experiencia operando en el mercado norteamericano.</div>
+        <span class="tl-badge">Miami, FL</span>
+      </div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-year">2018</div>
+      <div class="tl-content">
+        <div class="tl-title">El giro que cambió todo</div>
+        <div class="tl-org">Global Entrepreneurship Congress · Estambul</div>
+        <div class="tl-desc">Un booth de e-Estonia en el primer GEC que visité. E-residency. La decisión de integrarme al país digital más avanzado del mundo. LedeLab Group OÜ nace en Estonia.</div>
+        <span class="tl-badge">Estambul, Turquía</span>
+        <span class="tl-badge teal">e-Residency #1</span>
+      </div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-year">2021</div>
+      <div class="tl-content">
+        <div class="tl-title">Bologna Business School</div>
+        <div class="tl-org">MBA · Sustainability Transition Management</div>
+        <div class="tl-desc">Formación en gestión de la transición hacia la sostenibilidad. El marco teórico que integra empresa, impacto y sistemas. Conexiones con el ecosistema europeo de innovación.</div>
+        <span class="tl-badge">Bolonia, Italia</span>
+      </div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-year">2023</div>
+      <div class="tl-content">
+        <div class="tl-title">Universidad de Tartu</div>
+        <div class="tl-org">MA · Educational Technology</div>
+        <div class="tl-desc">Investigación sobre IA conversacional y cambio de comportamiento en padres colombianos. Tesis: el Modelo Transteórico aplicado a agentes conversacionales — respaldo académico del CAM.</div>
+        <span class="tl-badge">Tartu, Estonia</span>
+        <span class="tl-badge teal">Defensa junio 2026</span>
+      </div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-year">2024</div>
+      <div class="tl-content">
+        <div class="tl-title">Bienestar 360</div>
+        <div class="tl-org">Cofundador · CTO/CSO</div>
+        <div class="tl-desc">Agente conversacional de bienestar familiar que llega a través de los colegios colombianos. Metodología clínica + IA + diseño conductual. El primer producto de LedeLab con tracción comercial real.</div>
+        <span class="tl-badge">Barranquilla</span>
+        <span class="tl-badge teal">En producción</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2026 →</div>
+      <div class="tl-content">
+        <div class="tl-title">EIC Accelerator</div>
+        <div class="tl-org">European Innovation Council · LedeLab OÜ</div>
+        <div class="tl-desc">Aplicación en curso: hasta €2.5M grant + equity EIC Fund. El paso que consolida LedeLab como puente tecnológico entre América Latina y Europa.</div>
+        <span class="tl-badge">Deadline sep 2026</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <p class="section-label">Proyectos activos</p>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-name">LedeLab Group</div>
+      <div class="project-desc">Empresa tecnológica registrada en Estonia. Propietaria de la infraestructura, el CAM y las licencias. Puente entre innovación europea y proyectos de impacto en LATAM.</div>
+      <a href="https://ledelab.group" class="project-link">ledelab.group</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-name">Bienestar 360</div>
+      <div class="project-desc">Agente de bienestar familiar por WhatsApp para colegios colombianos. SRB + IA + CAM. Modelo B2B2C: el colegio distribuye, la familia paga, los niños mejoran.</div>
+      <a href="https://bienestar360.co" class="project-link">bienestar360.co</a>
+    </div>
+
+    <div class="project-card teal">
+      <div class="project-num">03</div>
+      <div class="project-name">DelaVent · CAM</div>
+      <div class="project-desc">Behavioral Design Layer. Componente de Acompañamiento Motivacional con TTM, COM-B, MI y SDT. Marca registrada EU. Activable como capa en cualquier agente conversacional.</div>
+      <a href="https://ledelab.group" class="project-link teal">EUTM 018568770</a>
+    </div>
+
+    <div class="project-card teal">
+      <div class="project-num">04</div>
+      <div class="project-name">Protemad</div>
+      <div class="project-desc">32 años en preservación de madera y fungicidas agrícolas en Colombia. Eco Fungal 054 y 090. Director de Sostenibilidad e Innovación desde 2024.</div>
+      <a href="mailto:leonardo@ledelab.group" class="project-link teal">Contactar</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PATENTES -->
+<section>
+  <p class="section-label">Patentes</p>
+  <div class="patents-list">
+    <div class="patent-item">
+      <span class="patent-icon">PAT 01</span>
+      <span class="patent-text">Coating and additive with biocidal and/or repellent effects in construction materials</span>
+    </div>
+    <div class="patent-item">
+      <span class="patent-icon">PAT 02</span>
+      <span class="patent-text">In-situ production method of a biocidal treatment based on recycled copper for the protection of wood, swimming pools, agricultural crops and other applications</span>
+    </div>
+    <div class="patent-item">
+      <span class="patent-icon">PAT 03</span>
+      <span class="patent-text">System to facilitate effective social integration and the entrepreneurship of related communities</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-name">Leonardo De la Hoz Borrego</div>
+    <div class="f-links" style="margin-top:0.75rem">
+      <a href="mailto:leonardo@ledelab.group">leonardo@ledelab.group</a>
+      <a href="https://www.linkedin.com/in/leonardodelahoz" target="_blank">LinkedIn</a>
+      <a href="https://ledelab.group">LedeLab.group</a>
+    </div>
+  </div>
+  <div class="f-right">Barranquilla · Estonia · 2026</div>
+</footer>
+
+<script>
+  // Scroll-triggered timeline items
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>

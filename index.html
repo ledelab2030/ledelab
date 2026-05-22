@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LedeLab Group OÜ</title>
   <meta name="description" content="LedeLab Group OÜ — Deep-tech venture studio. AI-driven health and education technology. Tallinn, Estonia." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="LedeLab Group OÜ — Deep-tech venture studio" />
+  <meta property="og:description" content="AI-driven platforms at the intersection of health, education, and behaviour science. Tallinn, Estonia." />
+  <meta property="og:url" content="https://ledelab.group" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://ledelab.group/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://ledelab.group" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
@@ -58,19 +71,12 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
       text-decoration: none;
       color: var(--text);
     }
 
+    /* FIX: el SVG ya contiene el texto "ledelab" — sin span extra */
     .nav-logo img { height: 22px; opacity: 0.9; }
-
-    .nav-logo span {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      font-weight: 400;
-    }
 
     .nav-right {
       display: flex;
@@ -344,9 +350,9 @@
 
   <!-- NAV -->
   <nav>
+    <!-- FIX: eliminado <span>LEDELAB</span> — el SVG ya incluye el texto "ledelab" -->
     <a class="nav-logo" href="/">
-      <img src="/assets/logo.svg" alt="LedeLab" />
-      <span>LEDELAB</span>
+      <img src="/assets/logo.svg" alt="LedeLab Group" />
     </a>
     <div class="nav-right">
       <ul class="nav-links">

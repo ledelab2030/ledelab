@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Leonardo De la Hoz · LedeLab</title>
+<meta name="description" content="Leonardo De la Hoz Borrego — Founder of LedeLab Group OÜ. Deep-tech venture builder at the intersection of health, education, and behaviour science." />
+
+<!-- Favicon — consistente con home -->
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+
+<!-- Open Graph / Social -->
+<meta property="og:title" content="Leonardo De la Hoz Borrego · LedeLab Group" />
+<meta property="og:description" content="Founder of LedeLab Group OÜ. Building from the intersection of technology, wellbeing and education. Barranquilla · Estonia." />
+<meta property="og:url" content="https://ledelab.group/leonardo" />
+<meta property="og:type" content="profile" />
+<meta property="og:image" content="https://ledelab.group/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://ledelab.group/leonardo" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script>
@@ -24,11 +38,17 @@
   body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;transition:background .5s,color .5s}
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.3}
 
+  /* ── NAV — consistente con home ── */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,12,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .4s}
   [data-theme="light"] nav{background:rgba(244,241,234,.9)}
-  .nav-logo{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;text-decoration:none}
+
+  /* FIX: nav-logo con imagen, igual que home */
+  .nav-logo{display:flex;align-items:center;text-decoration:none}
+  .nav-logo img{height:20px;opacity:0.85;transition:opacity .2s}
+  .nav-logo:hover img{opacity:1}
+
   .nav-links{display:flex;gap:1.75rem;list-style:none}
-  .nav-links a{font-size:.73rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+  .nav-links a{font-size:.73rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;font-family:var(--mono)}
   .nav-links a:hover{color:var(--text)}
   .nav-controls{display:flex;align-items:center;gap:.55rem}
   .ctrl{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .62rem;cursor:pointer;border-radius:2px;transition:border-color .2s,color .2s}
@@ -113,12 +133,16 @@
 <body>
 
 <nav>
-  <a href="/" class="nav-logo">LedeLab.group</a>
+  <!-- FIX: logo SVG igual que home, reemplaza el texto plano anterior -->
+  <a href="/" class="nav-logo">
+    <img src="/assets/logo.svg" alt="LedeLab Group" />
+  </a>
   <ul class="nav-links">
-    <li><a href="#trayectoria" data-en="Timeline" data-es="Trayectoria"></a></li>
-    <li><a href="#proyectos" data-en="Projects" data-es="Proyectos"></a></li>
-    <li><a href="#manifiesto" data-en="Manifesto" data-es="Manifiesto"></a></li>
-    <li><a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto"></a></li>
+    <!-- FIX: texto hardcoded como fallback — JS lo sobreescribe al cargar -->
+    <li><a href="#trayectoria" data-en="Timeline" data-es="Trayectoria">Timeline</a></li>
+    <li><a href="#proyectos" data-en="Projects" data-es="Proyectos">Projects</a></li>
+    <li><a href="#manifiesto" data-en="Manifesto" data-es="Manifiesto">Manifesto</a></li>
+    <li><a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto">Contact</a></li>
   </ul>
   <div class="nav-controls">
     <button class="ctrl" id="btn-es" onclick="setLang('es')">ES</button>
@@ -130,8 +154,7 @@
 
 <div class="hero">
   <p class="hero-eyebrow">ledelab.group / leonardo</p>
-  <h1>Leonardo<br>De la Hoz <em>Borrego</em></h1>
-  <p class="hero-sub"
+  <h1>Leonardo<br><em>De la Hoz Borrego</em></h1>  <p class="hero-sub"
     data-en="Building from the intersection of technology, wellbeing and education. Barranquilla is where I bet. Estonia and Tartu give me perspective."
     data-es="Construyo desde la intersección entre tecnología, bienestar y educación. Barranquilla es donde apuesto. Estonia y Tartu me dan perspectiva."></p>
   <div class="hero-tags">
@@ -151,7 +174,8 @@
 
 <section>
   <div class="stats">
-    <div class="stat-item"><div class="stat-num">32</div><div class="stat-label" data-en="Years building" data-es="Años construyendo"></div></div>
+    <!-- FIX: año dinámico via JS — no hardcodeado -->
+    <div class="stat-item"><div class="stat-num" id="years-stat">32</div><div class="stat-label" data-en="Years building" data-es="Años construyendo"></div></div>
     <div class="stat-item"><div class="stat-num">3</div><div class="stat-label" data-en="Patents" data-es="Patentes"></div></div>
     <div class="stat-item"><div class="stat-num">6</div><div class="stat-label" data-en="Languages" data-es="Idiomas"></div></div>
     <div class="stat-item"><div class="stat-num">2018</div><div class="stat-label">e-Residency Estonia</div></div>
@@ -346,9 +370,12 @@
   function toggleTheme(){applyTheme(currentTheme==='dark'?'light':'dark');}
   function setLang(l){applyLang(l);}
 
+  // FIX: años de trayectoria calculados dinámicamente
+  document.getElementById('years-stat').textContent = new Date().getFullYear() - 1994;
+
   var obs=new IntersectionObserver(function(entries){
     entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*80);});
-  },{threshold:.15});
+  },{threshold:.15,rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.tl-item').forEach(function(el){obs.observe(el);});
 
   applyTheme(currentTheme);

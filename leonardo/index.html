@@ -6,10 +6,8 @@
 <title>Leonardo De la Hoz · LedeLab</title>
 <meta name="description" content="Leonardo De la Hoz Borrego — Founder of LedeLab Group OÜ. Deep-tech venture builder at the intersection of health, education, and behaviour science." />
 
-<!-- Favicon — consistente con home -->
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 
-<!-- Open Graph / Social -->
 <meta property="og:title" content="Leonardo De la Hoz Borrego · LedeLab Group" />
 <meta property="og:description" content="Founder of LedeLab Group OÜ. Building from the intersection of technology, wellbeing and education. Barranquilla · Estonia." />
 <meta property="og:url" content="https://ledelab.group/leonardo" />
@@ -38,15 +36,11 @@
   body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;transition:background .5s,color .5s}
   body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.3}
 
-  /* ── NAV — consistente con home ── */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(8,12,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .4s}
   [data-theme="light"] nav{background:rgba(244,241,234,.9)}
-
-  /* FIX: nav-logo con imagen, igual que home */
   .nav-logo{display:flex;align-items:center;text-decoration:none}
   .nav-logo img{height:20px;opacity:0.85;transition:opacity .2s}
   .nav-logo:hover img{opacity:1}
-
   .nav-links{display:flex;gap:1.75rem;list-style:none}
   .nav-links a{font-size:.73rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;font-family:var(--mono)}
   .nav-links a:hover{color:var(--text)}
@@ -133,12 +127,10 @@
 <body>
 
 <nav>
-  <!-- FIX: logo SVG igual que home, reemplaza el texto plano anterior -->
   <a href="/" class="nav-logo">
     <img src="/assets/logo.svg" alt="LedeLab Group" />
   </a>
   <ul class="nav-links">
-    <!-- FIX: texto hardcoded como fallback — JS lo sobreescribe al cargar -->
     <li><a href="#trayectoria" data-en="Timeline" data-es="Trayectoria">Timeline</a></li>
     <li><a href="#proyectos" data-en="Projects" data-es="Proyectos">Projects</a></li>
     <li><a href="#manifiesto" data-en="Manifesto" data-es="Manifiesto">Manifesto</a></li>
@@ -154,7 +146,8 @@
 
 <div class="hero">
   <p class="hero-eyebrow">ledelab.group / leonardo</p>
-  <h1>Leonardo<br><em>De la Hoz Borrego</em></h1>  <p class="hero-sub"
+  <h1>Leonardo<br><em>De la Hoz Borrego</em></h1>
+  <p class="hero-sub"
     data-en="Building from the intersection of technology, wellbeing and education. Barranquilla is where I bet. Estonia and Tartu give me perspective."
     data-es="Construyo desde la intersección entre tecnología, bienestar y educación. Barranquilla es donde apuesto. Estonia y Tartu me dan perspectiva."></p>
   <div class="hero-tags">
@@ -174,7 +167,6 @@
 
 <section>
   <div class="stats">
-    <!-- FIX: año dinámico via JS — no hardcodeado -->
     <div class="stat-item"><div class="stat-num" id="years-stat">32</div><div class="stat-label" data-en="Years building" data-es="Años construyendo"></div></div>
     <div class="stat-item"><div class="stat-num">3</div><div class="stat-label" data-en="Patents" data-es="Patentes"></div></div>
     <div class="stat-item"><div class="stat-num">6</div><div class="stat-label" data-en="Languages" data-es="Idiomas"></div></div>
@@ -204,85 +196,139 @@
 <section id="trayectoria">
   <p class="section-label" data-en="Timeline" data-es="Trayectoria"></p>
   <div class="timeline">
+
     <div class="tl-item">
       <div class="tl-year">1994</div>
       <div class="tl-content">
         <div class="tl-title" data-en="The roots" data-es="Las raíces"></div>
         <div class="tl-org">Grupo Protemad · Barranquilla</div>
-        <div class="tl-desc" data-en="Joined the family business at 21. 32 uninterrupted years building in the Colombian Caribbean — wood preservatives, fungicides, chemical industry. The most enduring school." data-es="Inicio en la empresa familiar a los 21 años. 32 años de construcción ininterrumpida en el Caribe colombiano — preservantes para madera, fungicidas, industria química. La escuela más duradera."></div>
+        <div class="tl-desc"
+          data-en="Joined the family business at 21. Over 30 uninterrupted years building in the Colombian Caribbean — wood preservatives, fungicides, chemical industry. The most enduring school."
+          data-es="Inicio en la empresa familiar a los 21 años. Más de 30 años de construcción ininterrumpida en el Caribe colombiano — preservantes para madera, fungicidas, industria química. La escuela más duradera."></div>
       </div>
     </div>
+
     <div class="tl-item">
       <div class="tl-year">1996</div>
       <div class="tl-content">
         <div class="tl-title" data-en="First independent venture" data-es="Primera apuesta propia"></div>
         <div class="tl-org">LedeLab Energy / Petrocaribe Ingeniería</div>
-        <div class="tl-desc" data-en="First independent company at 23. Energy, engineering, transition toward sustainable solutions. The seed of what LedeLab is today." data-es="Primera empresa independiente a los 23 años. Energía, ingeniería, transición hacia soluciones sostenibles. El embrión de lo que hoy es LedeLab."></div>
+        <div class="tl-desc"
+          data-en="First independent company at 23. Energy, engineering, transition toward sustainable solutions. The seed of what LedeLab is today."
+          data-es="Primera empresa independiente a los 23 años. Energía, ingeniería, transición hacia soluciones sostenibles. El embrión de lo que hoy es LedeLab."></div>
       </div>
     </div>
+
     <div class="tl-item">
       <div class="tl-year">2001</div>
       <div class="tl-content">
         <div class="tl-title" data-en="Corporate world" data-es="Salida al mundo corporativo"></div>
         <div class="tl-org">Monómeros Colombo Venezolanos</div>
-        <div class="tl-desc" data-en="Industrial sales at one of Colombia's largest petrochemical companies. Four years learning to operate at scale." data-es="Ventas industriales en una de las empresas petroquímicas más grandes de Colombia. Cuatro años aprendiendo a operar a escala."></div>
+        <div class="tl-desc"
+          data-en="Industrial sales at one of Colombia's largest petrochemical companies. Four years learning to operate at scale."
+          data-es="Ventas industriales en una de las empresas petroquímicas más grandes de Colombia. Cuatro años aprendiendo a operar a escala."></div>
       </div>
     </div>
+
     <div class="tl-item">
       <div class="tl-year">2012</div>
       <div class="tl-content">
         <div class="tl-title" data-en="Miami expansion" data-es="Expansión a Miami"></div>
         <div class="tl-org">Protemad USA Corp · Miami, FL</div>
-        <div class="tl-desc" data-en="Four years as president of the Miami operation. First experience running a company in the North American market." data-es="Cuatro años como presidente de la operación en Miami. Primera experiencia operando en el mercado norteamericano."></div>
+        <div class="tl-desc"
+          data-en="Four years as president of the Miami operation. First experience running a company in the North American market."
+          data-es="Cuatro años como presidente de la operación en Miami. Primera experiencia operando en el mercado norteamericano."></div>
       </div>
     </div>
+
     <div class="tl-item hl">
       <div class="tl-year">2018</div>
       <div class="tl-content">
         <div class="tl-title" data-en="The pivot that changed everything" data-es="El giro que cambió todo"></div>
         <div class="tl-org">Global Entrepreneurship Congress · Istanbul</div>
-        <div class="tl-desc" data-en="An e-Estonia booth at my first GEC. e-Residency. The decision to integrate into the world's most advanced digital country. LedeLab Group OÜ registered in Estonia." data-es="Un booth de e-Estonia en el primer GEC que visité. E-residency. La decisión de integrarme al país digital más avanzado del mundo. LedeLab Group OÜ nace en Estonia."></div>
-        <span class="badge" data-en="Istanbul, Turkey" data-es="Estambul, Turquía"></span>
+        <div class="tl-desc"
+          data-en="An e-Estonia booth at my first GEC. e-Residency. The decision to integrate into the world's most advanced digital country. LedeLab Group OÜ registered in Estonia."
+          data-es="Un booth de e-Estonia en el primer GEC que visité. E-residency. La decisión de integrarme al país digital más avanzado del mundo. LedeLab Group OÜ nace en Estonia."></div>
+        <span class="badge" data-en="Istanbul, Turkey" data-es="Estambul, Turquía">Istanbul, Turkey</span>
         <span class="badge teal">e-Residency</span>
       </div>
     </div>
+
     <div class="tl-item hl">
       <div class="tl-year">2021</div>
       <div class="tl-content">
         <div class="tl-title">Bologna Business School</div>
         <div class="tl-org">MBA · Sustainability Transition Management</div>
-        <div class="tl-desc" data-en="Training in sustainability transition management. The theoretical framework integrating business, impact and systems. Connections with the European innovation ecosystem." data-es="Formación en gestión de la transición hacia la sostenibilidad. El marco teórico que integra empresa, impacto y sistemas. Conexiones con el ecosistema europeo de innovación."></div>
+        <div class="tl-desc"
+          data-en="Training in sustainability transition management. The theoretical framework integrating business, impact and systems. Connections with the European innovation ecosystem."
+          data-es="Formación en gestión de la transición hacia la sostenibilidad. El marco teórico que integra empresa, impacto y sistemas. Conexiones con el ecosistema europeo de innovación."></div>
         <span class="badge">Bologna, Italy</span>
       </div>
     </div>
+
     <div class="tl-item hl">
       <div class="tl-year">2023</div>
       <div class="tl-content">
         <div class="tl-title" data-en="University of Tartu" data-es="Universidad de Tartu"></div>
         <div class="tl-org">MA · Educational Technology</div>
-        <div class="tl-desc" data-en="Research on conversational AI and behavior change in Colombian parents. Thesis: the Transtheoretical Model applied to conversational agents — academic foundation of the CAM." data-es="Investigación sobre IA conversacional y cambio de comportamiento en padres colombianos. Tesis: el Modelo Transteórico aplicado a agentes conversacionales — respaldo académico del CAM."></div>
+        <div class="tl-desc"
+          data-en="Research on conversational AI and behavior change in Colombian parents. Thesis: the Transtheoretical Model applied to conversational agents — academic foundation of the CAM."
+          data-es="Investigación sobre IA conversacional y cambio de comportamiento en padres colombianos. Tesis: el Modelo Transteórico aplicado a agentes conversacionales — respaldo académico del CAM."></div>
         <span class="badge">Tartu, Estonia</span>
-        <span class="badge teal" data-en="Defense June 2026" data-es="Defensa junio 2026"></span>
+        <span class="badge teal" data-en="Defense June 2026" data-es="Defensa junio 2026">Defense June 2026</span>
       </div>
     </div>
+
+    <div class="tl-item">
+      <div class="tl-year">2023</div>
+      <div class="tl-content">
+        <div class="tl-title">IBESI Impact Crash Course</div>
+        <div class="tl-org">Social Enterprise Estonia · Tallinn</div>
+        <div class="tl-desc"
+          data-en="Intensive program on business planning, market research, marketing and pitching — funded by the European Union. Partners: Social Enterprise Estonia, Baltic Innovation Agency, Reach for Change, Katalista Ventures."
+          data-es="Programa intensivo de planificación empresarial, investigación de mercado, marketing y pitching — financiado por la Unión Europea. Socios: Social Enterprise Estonia, Baltic Innovation Agency, Reach for Change, Katalista Ventures."></div>
+        <span class="badge">Tallinn, Estonia</span>
+        <span class="badge teal">EU Funded</span>
+      </div>
+    </div>
+
+    <div class="tl-item hl">
+      <div class="tl-year">2025</div>
+      <div class="tl-content">
+        <div class="tl-title">Global Entrepreneurship Congress</div>
+        <div class="tl-org">GEC Indiana 2025 · Ecosystem Builder</div>
+        <div class="tl-desc"
+          data-en="Returned to the GEC — seven years after Istanbul, where the e-Residency story began — now representing LedeLab Group OÜ as Ecosystem Builder. The full arc of a bet that paid off."
+          data-es="De vuelta al GEC — siete años después de Estambul, donde comenzó la historia de e-Residency — esta vez representando LedeLab Group OÜ como Ecosystem Builder. El arco completo de una apuesta que funcionó."></div>
+        <span class="badge">Indiana, USA</span>
+        <span class="badge teal">LedeLab Group OÜ · Estonia</span>
+      </div>
+    </div>
+
     <div class="tl-item hl">
       <div class="tl-year">2026</div>
       <div class="tl-content">
         <div class="tl-title">Bienestar 360</div>
-        <div class="tl-org" data-en="Co-founder · CTO/CSO" data-es="Cofundador · CTO/CSO"></div>
-        <div class="tl-desc" data-en="Family wellness conversational agent reaching Colombian schools. Clinical methodology + AI + behavioral design. LedeLab's first product with real commercial traction." data-es="Agente conversacional de bienestar familiar que llega a través de los colegios colombianos. Metodología clínica + IA + diseño conductual. El primer producto de LedeLab con tracción comercial real."></div>
-        <span class="badge teal" data-en="In production" data-es="En producción"></span>
+        <div class="tl-org" data-en="Co-founder · CTO/CSO" data-es="Cofundador · CTO/CSO">Co-founder · CTO/CSO</div>
+        <div class="tl-desc"
+          data-en="Family wellness conversational agent reaching Colombian schools. Clinical methodology + AI + behavioral design. LedeLab's first product with real commercial traction."
+          data-es="Agente conversacional de bienestar familiar que llega a través de los colegios colombianos. Metodología clínica + IA + diseño conductual. El primer producto de LedeLab con tracción comercial real."></div>
+        <span class="badge teal" data-en="In production" data-es="En producción">In production</span>
       </div>
     </div>
+
     <div class="tl-item">
       <div class="tl-year">2026 →</div>
       <div class="tl-content">
         <div class="tl-title">EIC Accelerator</div>
         <div class="tl-org">European Innovation Council · LedeLab OÜ</div>
-        <div class="tl-desc" data-en="Application in progress: up to €2.5M grant + EIC Fund equity. The step that consolidates LedeLab as a technology bridge between Latin America and Europe." data-es="Aplicación en curso: hasta €2.5M grant + equity EIC Fund. El paso que consolida LedeLab como puente tecnológico entre América Latina y Europa."></div>
-        <span class="badge" data-en="Deadline Sep 2026" data-es="Deadline sep 2026"></span>
+        <div class="tl-desc"
+          data-en="Application in progress: up to €2.5M grant + EIC Fund equity. The step that consolidates LedeLab as a technology bridge between Latin America and Europe."
+          data-es="Aplicación en curso: hasta €2.5M grant + equity EIC Fund. El paso que consolida LedeLab como puente tecnológico entre América Latina y Europa."></div>
+        <span class="badge" data-en="Deadline Sep 2026" data-es="Deadline sep 2026">Deadline Sep 2026</span>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -291,30 +337,52 @@
 <section id="proyectos">
   <p class="section-label" data-en="Active projects" data-es="Proyectos activos"></p>
   <div class="projects-grid">
+
     <div class="project-card">
       <div class="project-num">01</div>
       <div class="project-name">LedeLab Group</div>
-      <div class="project-desc" data-en="Technology company registered in Estonia. Owner of infrastructure, the CAM behavioral layer and licenses. Bridge between European innovation and LATAM impact projects." data-es="Empresa tecnológica registrada en Estonia. Propietaria de la infraestructura, el CAM y las licencias. Puente entre innovación europea y proyectos de impacto en LATAM."></div>
+      <div class="project-desc"
+        data-en="Technology company registered in Estonia. Owner of infrastructure, the CAM behavioral layer and licenses. Bridge between European innovation and LATAM impact projects."
+        data-es="Empresa tecnológica registrada en Estonia. Propietaria de la infraestructura, el CAM y las licencias. Puente entre innovación europea y proyectos de impacto en LATAM."></div>
       <a href="https://ledelab.group" class="project-link">ledelab.group</a>
     </div>
+
     <div class="project-card">
       <div class="project-num">02</div>
       <div class="project-name">Bienestar 360</div>
-      <div class="project-desc" data-en="Family wellness agent via WhatsApp for Colombian schools. SRB + AI + CAM. B2B2C model: the school distributes, the family pays, children thrive." data-es="Agente de bienestar familiar por WhatsApp para colegios colombianos. SRB + IA + CAM. Modelo B2B2C: el colegio distribuye, la familia paga, los niños mejoran."></div>
+      <div class="project-desc"
+        data-en="Family wellness agent via WhatsApp for Colombian schools. SRB + AI + CAM. B2B2C model: the school distributes, the family pays, children thrive."
+        data-es="Agente de bienestar familiar por WhatsApp para colegios colombianos. SRB + IA + CAM. Modelo B2B2C: el colegio distribuye, la familia paga, los niños mejoran."></div>
       <a href="https://bienestar360.co" class="project-link">bienestar360.co</a>
     </div>
+
     <div class="project-card teal">
       <div class="project-num">03</div>
       <div class="project-name">DelaVent · CAM</div>
-      <div class="project-desc" data-en="Behavioral Design Layer. Motivational Accompaniment Component with TTM, COM-B, MI and SDT. EU registered trademark. Activatable as a layer in any conversational agent." data-es="Behavioral Design Layer. Componente de Acompañamiento Motivacional con TTM, COM-B, MI y SDT. Marca registrada EU. Activable como capa en cualquier agente conversacional."></div>
+      <div class="project-desc"
+        data-en="Behavioral Design Layer. Motivational Accompaniment Component with TTM, COM-B, MI and SDT. EU registered trademark. Activatable as a layer in any conversational agent."
+        data-es="Behavioral Design Layer. Componente de Acompañamiento Motivacional con TTM, COM-B, MI y SDT. Marca registrada EU. Activable como capa en cualquier agente conversacional."></div>
       <a href="https://ledelab.group" class="project-link teal">EUTM 018568770</a>
     </div>
+
     <div class="project-card teal">
       <div class="project-num">04</div>
       <div class="project-name">Protemad</div>
-      <div class="project-desc" data-en="32 years in wood preservation and agricultural fungicides in Colombia. Eco Fungal 054 and 090. Director of Sustainability & Innovation since 2024." data-es="32 años en preservación de madera y fungicidas agrícolas en Colombia. Eco Fungal 054 y 090. Director de Sostenibilidad e Innovación desde 2024."></div>
-      <a href="mailto:leonardo@ledelab.group" class="project-link teal" data-en="Contact" data-es="Contactar"></a>
+      <div class="project-desc"
+        data-en="Family-led company, 30+ years in wood preservation and agricultural fungicides in Colombia. Eco Fungal 054 and 090. Director of Sustainability &amp; Innovation since 2024."
+        data-es="Empresa familiar, más de 30 años en preservación de madera y fungicidas agrícolas en Colombia. Eco Fungal 054 y 090. Director de Sostenibilidad e Innovación desde 2024."></div>
+      <a href="mailto:leonardo@ledelab.group" class="project-link teal" data-en="Contact" data-es="Contactar">Contact</a>
     </div>
+
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-name">ADIMAT · I+DE</div>
+      <div class="project-desc"
+        data-en="R&amp;D company for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture. The innovation engine behind Protemad's product line — MSc-level chemistry research, Barranquilla."
+        data-es="Empresa de I+D en bioprotección sostenible. Tecnología química y aditivos biocidas para madera, construcción y agricultura. El motor de innovación detrás de la línea de productos Protemad — investigación química de nivel MSc, Barranquilla."></div>
+      <a href="https://imasde.co" class="project-link">imasde.co</a>
+    </div>
+
   </div>
 </section>
 
@@ -323,9 +391,18 @@
 <section>
   <p class="section-label" data-en="Patents" data-es="Patentes"></p>
   <div class="patents-list">
-    <div class="patent-item"><span class="patent-icon">PAT 01</span><span class="patent-text">Coating and additive with biocidal and/or repellent effects in construction materials</span></div>
-    <div class="patent-item"><span class="patent-icon">PAT 02</span><span class="patent-text">In-situ production method of a biocidal treatment based on recycled copper for the protection of wood, swimming pools, agricultural crops and other applications</span></div>
-    <div class="patent-item"><span class="patent-icon">PAT 03</span><span class="patent-text">System to facilitate effective social integration and the entrepreneurship of related communities</span></div>
+    <div class="patent-item">
+      <span class="patent-icon">PAT 01</span>
+      <span class="patent-text">Coating and additive with biocidal and/or repellent effects in construction materials</span>
+    </div>
+    <div class="patent-item">
+      <span class="patent-icon">PAT 02</span>
+      <span class="patent-text">In-situ production method of a biocidal treatment based on recycled copper for the protection of wood, swimming pools, agricultural crops and other applications</span>
+    </div>
+    <div class="patent-item">
+      <span class="patent-icon">PAT 03</span>
+      <span class="patent-text">System to facilitate effective social integration and the entrepreneurship of related communities</span>
+    </div>
   </div>
 </section>
 
@@ -370,11 +447,13 @@
   function toggleTheme(){applyTheme(currentTheme==='dark'?'light':'dark');}
   function setLang(l){applyLang(l);}
 
-  // FIX: años de trayectoria calculados dinámicamente
+  // Años de trayectoria dinámicos
   document.getElementById('years-stat').textContent = new Date().getFullYear() - 1994;
 
   var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*80);});
+    entries.forEach(function(e,i){
+      if(e.isIntersecting) setTimeout(function(){e.target.classList.add('visible');},i*80);
+    });
   },{threshold:.15,rootMargin:'0px 0px -50px 0px'});
   document.querySelectorAll('.tl-item').forEach(function(el){obs.observe(el);});
 

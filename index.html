@@ -6,10 +6,8 @@
   <title>LedeLab Group OÜ</title>
   <meta name="description" content="LedeLab Group OÜ — Deep-tech venture studio. AI-driven health and education technology. Tallinn, Estonia." />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
 
-  <!-- Open Graph / Social -->
   <meta property="og:title" content="LedeLab Group OÜ — Deep-tech venture studio" />
   <meta property="og:description" content="AI-driven platforms at the intersection of health, education, and behaviour science. Tallinn, Estonia." />
   <meta property="og:url" content="https://ledelab.group" />
@@ -31,7 +29,8 @@
       --border: #262626;
       --text: #e8e6e1;
       --muted: #666;
-      --accent: #c8b89a;
+      --accent: #c8b89a;   /* oro LedeLab */
+      --estonia: #4a80f0;  /* azul estonio — dark mode */
       --link: #e8e6e1;
     }
 
@@ -42,6 +41,7 @@
       --text: #1a1a1a;
       --muted: #888;
       --accent: #8a6f4e;
+      --estonia: #1B56E2;  /* azul estonio — light mode exacto */
       --link: #1a1a1a;
     }
 
@@ -75,7 +75,6 @@
       color: var(--text);
     }
 
-    /* El SVG ya contiene el texto "ledelab" — sin span extra */
     .nav-logo img { height: 22px; opacity: 0.9; }
 
     .nav-right {
@@ -101,7 +100,7 @@
 
     .nav-links a:hover { color: var(--text); }
 
-    /* ── CONTROLS (theme + lang) ── */
+    /* ── CONTROLS ── */
     .nav-controls {
       display: flex;
       align-items: center;
@@ -230,7 +229,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ── EIC ── */
+    /* ── EIC — azul estonio ── */
     .eic-strip {
       padding: 2rem 2.5rem;
       display: flex;
@@ -243,11 +242,11 @@
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.12em;
-      color: var(--accent);
-      border: 1px solid var(--accent);
+      color: var(--estonia);
+      border: 1px solid var(--estonia);
       padding: 0.35rem 0.75rem;
       text-transform: uppercase;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     .eic-text {
@@ -439,7 +438,7 @@
     </div>
   </section>
 
-  <!-- EIC BADGE -->
+  <!-- EIC BADGE — azul estonio -->
   <div class="eic-strip">
     <span class="eic-badge">EIC Accelerator · Sept 2026</span>
     <span class="eic-text"
@@ -487,7 +486,7 @@
       localStorage.setItem('ll-theme', isLight ? 'light' : 'dark');
     }
 
-    // ── LANG ──
+    // ── LANG — botón único muestra el idioma disponible ──
     const langBtn = document.getElementById('langBtn');
     let currentLang = localStorage.getItem('ll-lang') || 'en';
     if (currentLang === 'es') applyLang('es');

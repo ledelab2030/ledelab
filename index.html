@@ -22,6 +22,16 @@
       --link: #e8e6e1;
     }
 
+    :root.light {
+      --bg: #f7f5f2;
+      --surface: #edeae5;
+      --border: #d8d4cc;
+      --text: #1a1a1a;
+      --muted: #888;
+      --accent: #8a6f4e;
+      --link: #1a1a1a;
+    }
+
     html { font-size: 16px; scroll-behavior: smooth; }
 
     body {
@@ -33,6 +43,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      transition: background 0.25s, color 0.25s;
     }
 
     /* ── NAV ── */
@@ -61,6 +72,12 @@
       font-weight: 400;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
     .nav-links {
       display: flex;
       gap: 2rem;
@@ -77,6 +94,28 @@
     }
 
     .nav-links a:hover { color: var(--text); }
+
+    /* ── CONTROLS (theme + lang) ── */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .ctrl-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+
+    .ctrl-btn:hover { color: var(--text); border-color: var(--muted); }
 
     /* ── HERO ── */
     .hero {
@@ -109,7 +148,7 @@
 
     .hero-body {
       font-size: 1.05rem;
-      color: #a0a09a;
+      color: var(--muted);
       max-width: 560px;
       line-height: 1.75;
     }
@@ -172,7 +211,7 @@
 
     .venture-desc {
       font-size: 0.85rem;
-      color: #777;
+      color: var(--muted);
       line-height: 1.6;
       flex: 1;
     }
@@ -183,6 +222,31 @@
       color: var(--accent);
       letter-spacing: 0.05em;
       margin-top: 0.5rem;
+    }
+
+    /* ── EIC ── */
+    .eic-strip {
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .eic-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.35rem 0.75rem;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .eic-text {
+      font-size: 0.82rem;
+      color: var(--muted);
     }
 
     /* ── FOUNDER ── */
@@ -224,31 +288,6 @@
     }
 
     .founder-cta:hover { opacity: 0.85; }
-
-    /* ── EIC BADGE ── */
-    .eic-strip {
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .eic-badge {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.35rem 0.75rem;
-      text-transform: uppercase;
-      opacity: 0.8;
-    }
-
-    .eic-text {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
 
     /* ── FOOTER ── */
     footer {
@@ -309,18 +348,26 @@
       <img src="/assets/logo.svg" alt="LedeLab" />
       <span>LEDELAB</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="/leonardo">Founder</a></li>
-      <li><a href="https://bienestar360.co">B360</a></li>
-      <li><a href="mailto:leonardo@ledelab.group">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="/leonardo" data-en="Founder" data-es="Fundador">Founder</a></li>
+        <li><a href="https://bienestar360.co">B360</a></li>
+        <li><a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto">Contact</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="ctrl-btn" id="langBtn" onclick="toggleLang()">ES</button>
+        <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">☀</button>
+      </div>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-eyebrow">Deep-tech venture studio · Tallinn, Estonia</p>
-    <h1>Building technology that <em>changes behaviour,</em> not just measures it.</h1>
-    <p class="hero-body">
+    <p class="hero-eyebrow" data-en="Deep-tech venture studio · Tallinn, Estonia" data-es="Estudio de ventures deep-tech · Tallin, Estonia">Deep-tech venture studio · Tallinn, Estonia</p>
+    <h1 data-en="Building technology that <em>changes behaviour,</em> not just measures it." data-es="Construimos tecnología que <em>transforma conductas,</em> no solo las mide.">Building technology that <em>changes behaviour,</em> not just measures it.</h1>
+    <p class="hero-body"
+      data-en="LedeLab Group OÜ develops AI-driven platforms at the intersection of health, education, and behaviour science. We design interventions that work in the real world — schools, families, communities — and measure what actually matters."
+      data-es="LedeLab Group OÜ desarrolla plataformas con IA en la intersección de salud, educación y ciencias del comportamiento. Diseñamos intervenciones que funcionan en el mundo real — colegios, familias, comunidades — y medimos lo que realmente importa.">
       LedeLab Group OÜ develops AI-driven platforms at the intersection of health, education, and behaviour science. We design interventions that work in the real world — schools, families, communities — and measure what actually matters.
     </p>
   </section>
@@ -329,27 +376,39 @@
 
   <!-- VENTURES -->
   <section class="section">
-    <p class="section-label">Portfolio</p>
+    <p class="section-label" data-en="Portfolio" data-es="Portafolio">Portfolio</p>
     <div class="ventures">
 
       <a class="venture" href="https://bienestar360.co">
         <span class="venture-num">01</span>
         <span class="venture-name">Bienestar 360</span>
-        <span class="venture-desc">AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI.</span>
+        <span class="venture-desc"
+          data-en="AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI."
+          data-es="Intervención conductual preventiva basada en evidencia para niños y adolescentes en colegios. Reduce factores inflamatorios modificables — entregada mediante IA conversacional.">
+          AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI.
+        </span>
         <span class="venture-link">bienestar360.co ↗</span>
       </a>
 
       <div class="venture">
         <span class="venture-num">02</span>
         <span class="venture-name">CamIlA · DelaVent</span>
-        <span class="venture-desc">Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments.</span>
+        <span class="venture-desc"
+          data-en="Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments."
+          data-es="Plataforma de agentes IA para flujos de trabajo comunitarios y empresariales. Inteligencia conversacional modular para entornos de alta confianza.">
+          Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments.
+        </span>
         <span class="venture-link">EUTM 018568770</span>
       </div>
 
       <div class="venture">
         <span class="venture-num">03</span>
         <span class="venture-name">Protemad</span>
-        <span class="venture-desc">Biotechnology for materials protection. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets since 1994.</span>
+        <span class="venture-desc"
+          data-en="Biotechnology for materials protection. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets since 1994."
+          data-es="Biotecnología para protección de materiales. Tratamientos ecofúngicos y aditivos biocidas para madera, construcción y agricultura — validados en LATAM desde 1994.">
+          Biotechnology for materials protection. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets since 1994.
+        </span>
         <span class="venture-link">Barranquilla · Miami</span>
       </div>
 
@@ -359,7 +418,11 @@
   <!-- EIC BADGE -->
   <div class="eic-strip">
     <span class="eic-badge">EIC Accelerator · Sept 2026</span>
-    <span class="eic-text">Applicant — European Innovation Council · up to €2.5M</span>
+    <span class="eic-text"
+      data-en="Applicant — European Innovation Council · up to €2.5M"
+      data-es="Aplicante — Consejo Europeo de Innovación · hasta €2.5M">
+      Applicant — European Innovation Council · up to €2.5M
+    </span>
   </div>
 
   <hr class="divider" />
@@ -368,9 +431,13 @@
   <div class="founder-strip">
     <div class="founder-info">
       <span class="founder-name">Leonardo De la Hoz Borrego</span>
-      <span class="founder-sub">Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia</span>
+      <span class="founder-sub"
+        data-en="Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia"
+        data-es="Fundador · MBA Bolonia · MA EdTech Tartu · e-Residente Estonia">
+        Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia
+      </span>
     </div>
-    <a class="founder-cta" href="/leonardo">Full profile →</a>
+    <a class="founder-cta" href="/leonardo" data-en="Full profile →" data-es="Ver perfil →">Full profile →</a>
   </div>
 
   <!-- FOOTER -->
@@ -382,6 +449,38 @@
       <li><a href="mailto:leonardo@ledelab.group">leonardo@ledelab.group</a></li>
     </ul>
   </footer>
+
+  <script>
+    // ── THEME ──
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+    const savedTheme = localStorage.getItem('ll-theme') || 'dark';
+    if (savedTheme === 'light') { root.classList.add('light'); themeBtn.textContent = '☾'; }
+
+    function toggleTheme() {
+      const isLight = root.classList.toggle('light');
+      themeBtn.textContent = isLight ? '☾' : '☀';
+      localStorage.setItem('ll-theme', isLight ? 'light' : 'dark');
+    }
+
+    // ── LANG ──
+    const langBtn = document.getElementById('langBtn');
+    let currentLang = localStorage.getItem('ll-lang') || 'en';
+    if (currentLang === 'es') applyLang('es');
+
+    function toggleLang() {
+      currentLang = currentLang === 'en' ? 'es' : 'en';
+      localStorage.setItem('ll-lang', currentLang);
+      applyLang(currentLang);
+    }
+
+    function applyLang(lang) {
+      langBtn.textContent = lang === 'en' ? 'ES' : 'EN';
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.innerHTML = el.dataset[lang] || el.dataset.en;
+      });
+    }
+  </script>
 
 </body>
 </html>

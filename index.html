@@ -1,509 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LedeLab Group OÜ</title>
-  <meta name="description" content="LedeLab Group OÜ — Deep-tech venture studio. AI-driven health and education technology. Tallinn, Estonia." />
-
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-
-  <meta property="og:title" content="LedeLab Group OÜ — Deep-tech venture studio" />
-  <meta property="og:description" content="AI-driven platforms at the intersection of health, education, and behaviour science. Tallinn, Estonia." />
-  <meta property="og:url" content="https://ledelab.group" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://ledelab.group/assets/og.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://ledelab.group" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0d0d0d;
-      --surface: #161616;
-      --border: #262626;
-      --text: #e8e6e1;
-      --muted: #666;
-      --accent: #c8b89a;   /* oro LedeLab */
-      --estonia: #4a80f0;  /* azul estonio — dark mode */
-      --link: #e8e6e1;
-    }
-
-    :root.light {
-      --bg: #f7f5f2;
-      --surface: #edeae5;
-      --border: #d8d4cc;
-      --text: #1a1a1a;
-      --muted: #888;
-      --accent: #8a6f4e;
-      --estonia: #1B56E2;  /* azul estonio — light mode exacto */
-      --link: #1a1a1a;
-    }
-
-    html { font-size: 16px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.25s, color 0.25s;
-    }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.75rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .nav-logo img { height: 22px; opacity: 0.9; }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    /* ── CONTROLS ── */
-    .nav-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .ctrl-btn {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.6rem;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      line-height: 1;
-    }
-
-    .ctrl-btn:hover { color: var(--text); border-color: var(--muted); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 6rem 2.5rem 5rem;
-      max-width: 860px;
-    }
-
-    .hero-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 300;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-      color: var(--text);
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-body {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.75;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 2.5rem;
-    }
-
-    /* ── VENTURES ── */
-    .section {
-      padding: 4rem 2.5rem;
-    }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 2.5rem;
-    }
-
-    .ventures {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
-    .venture {
-      background: var(--bg);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: background 0.2s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .venture:hover { background: var(--surface); }
-
-    .venture-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    .venture-name {
-      font-size: 1.05rem;
-      font-weight: 400;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .venture-desc {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .venture-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-top: 0.5rem;
-    }
-
-    /* ── EIC — azul estonio ── */
-    .eic-strip {
-      padding: 2rem 2.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .eic-badge {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      color: var(--estonia);
-      border: 1px solid var(--estonia);
-      padding: 0.35rem 0.75rem;
-      text-transform: uppercase;
-      opacity: 0.85;
-    }
-
-    .eic-text {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    /* ── FOUNDER ── */
-    .founder-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 2.5rem 2.5rem;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .founder-info { display: flex; flex-direction: column; gap: 0.3rem; }
-
-    .founder-name {
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    .founder-sub {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .founder-cta {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--bg);
-      background: var(--accent);
-      text-decoration: none;
-      padding: 0.6rem 1.2rem;
-      transition: opacity 0.2s;
-    }
-
-    .founder-cta:hover { opacity: 0.85; }
-
-    /* ── FOOTER ── */
-    footer {
-      margin-top: auto;
-      padding: 1.75rem 2.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-left {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--text); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      nav, .section, .founder-strip, .eic-strip, footer, .divider {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-      .hero { padding: 3.5rem 1.25rem 3rem; }
-      .ventures { grid-template-columns: 1fr; }
-      .founder-strip { flex-direction: column; align-items: flex-start; }
-      nav { padding: 1.25rem; }
-      .nav-links { display: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LedeLab Group OÜ — Deep-tech venture studio</title>
+<meta name="description" content="A deep-tech venture studio operating the Estonia–Latin America corridor. AI-driven platforms for health, education and behaviour change. Tallinn, Estonia.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="canonical" href="https://ledelab.group">
+<meta property="og:title" content="LedeLab Group OÜ — Deep-tech venture studio">
+<meta property="og:description" content="AI-driven platforms operating the Estonia–Latin America corridor.">
+<meta property="og:url" content="https://ledelab.group">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== SISTEMA COMPARTIDO — idéntico al de ledelab.co / ledelab.ee ===== */
+  :root{
+    --ink:#172145;--ink-2:#0E1530;--paper:#F4F6FA;--card:#FFFFFF;
+    --navy:#2D388A;--navy-deep:#222B6B;--cyan:#00AEEF;--cyan-soft:#5BD0F5;
+    --amber:#C2792B;--muted:#5B6480;--line:#DCE1EC;--line-soft:#E7EBF3;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+    --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1120px;--gap:clamp(1.1rem,2.4vw,2rem);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+  .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;display:inline-flex;align-items:center;gap:.4em;border:1px solid var(--line);border-radius:2px;padding:.28em .55em;color:var(--muted);background:var(--card);white-space:nowrap}
+  .tag--ver{color:var(--amber);border-color:rgba(194,121,43,.4)}
+  .tag--ver::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--amber)}
+  .tag--src{color:var(--navy);border-color:rgba(45,56,138,.35)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:.7ch;flex-wrap:wrap}
+  .eyebrow .num{color:var(--ink);opacity:.45}.eyebrow .feeds{color:var(--muted);font-weight:400}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;margin:0}
+  h1{font-size:clamp(2.1rem,5.4vw,3.5rem);line-height:1.04}
+  h2{font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.1}
+  h3{font-size:1.2rem;line-height:1.22}p{margin:0}
+  header{position:sticky;top:0;z-index:50;background:rgba(244,246,250,.86);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+  .logo svg{height:26px;width:auto;display:block}
+  .edition{display:flex;align-items:center;gap:.5ch;padding-left:.7rem;border-left:1px solid var(--line)}
+  .edition .pub{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .edition .cc{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.06em;color:#fff;background:var(--navy);border-radius:2px;padding:.18em .42em}
+  .right{display:flex;align-items:center;gap:1rem}
+  nav.main{display:flex;align-items:center;gap:1.5rem}
+  nav.main a{font-size:.92rem;text-decoration:none;color:var(--ink);font-weight:500;opacity:.82}
+  nav.main a:hover,nav.main a:focus-visible{opacity:1;color:var(--navy)}
+  .ctrl{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;padding:.34rem .55rem;cursor:pointer;line-height:1}
+  .ctrl:hover{color:var(--navy);border-color:var(--navy)}
+  .navbtn{display:none;background:none;border:1px solid var(--line);border-radius:4px;width:40px;height:36px;cursor:pointer;color:var(--ink)}
+  @media(max-width:880px){nav.main{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem 0;display:none}nav.main.open{display:flex}nav.main a{padding:.7rem clamp(1.1rem,4vw,2.5rem);width:100%}.navbtn{display:inline-flex;align-items:center;justify-content:center}}
+  @media(max-width:520px){.edition .pub{display:none}}
+  .hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem)}
+  .hero .kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem}
+  .hero h1{max-width:20ch}.hero h1 em{font-style:italic;color:var(--navy)}
+  .hero .lede{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--muted);max-width:58ch;margin-top:1.4rem}
+  .method{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem;align-items:center}
+  .method .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.5;margin-right:.2rem}
+  section{padding:clamp(2.4rem,5vw,4rem) 0;border-top:1px solid var(--line-soft)}
+  .sec-head{display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.8rem;max-width:62ch}
+  .sec-head .desc{color:var(--muted);font-size:1.02rem}
+  .items{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);margin-top:1.8rem}
+  @media(max-width:680px){.items{grid-template-columns:1fr}}
+  .item{border-top:1px solid var(--line);padding-top:1rem;display:flex;flex-direction:column;gap:.55rem}
+  .item h3{font-weight:600}.item .meta{display:flex;flex-wrap:wrap;gap:.35rem}
+  .item a.t{text-decoration:none}.item a.t:hover h3,.item a.t:focus-visible h3{color:var(--navy)}
+  .item p{color:var(--muted);font-size:.95rem}
+  .item .lk{font-family:var(--mono);font-size:.7rem;color:var(--navy);letter-spacing:.05em;margin-top:.15rem}
+  .cta{margin-top:1.9rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.3rem}
+  .cta p{font-size:.97rem}.cta strong{font-weight:600}.cta .grow{flex:1;min-width:220px}
+  .btn{font-family:var(--sans);font-weight:600;font-size:.9rem;text-decoration:none;border-radius:5px;padding:.62rem 1.1rem;display:inline-block;border:1px solid transparent;white-space:nowrap;cursor:pointer}
+  .btn--brand{background:var(--navy);color:#fff}.btn--brand:hover,.btn--brand:focus-visible{background:var(--navy-deep)}
+  .btn--ghost{border-color:var(--ink);color:var(--ink);background:transparent}.btn--ghost:hover,.btn--ghost:focus-visible{background:var(--ink);color:#fff}
+  .corridor{background:var(--ink-2);color:var(--paper);border:none}
+  .corridor .eyebrow{color:var(--cyan-soft)}.corridor .eyebrow .num{color:#fff}.corridor .eyebrow .feeds{color:#9AA6CE}
+  .corridor h2{color:#fff;max-width:22ch;margin-top:.9rem}
+  .corridor .desc{color:#B7C0DE;max-width:58ch;margin-top:1rem;font-size:1.05rem}
+  .flow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1.8rem 0;font-family:var(--mono);font-size:.8rem}
+  .flow span{border:1px solid rgba(255,255,255,.22);border-radius:3px;padding:.45em .7em;color:#DDE4F4}
+  .flow .arr{border:none;color:var(--cyan-soft);padding:0 .1em}
+  .corridor .btn--brand{background:#fff;color:var(--ink-2)}.corridor .btn--brand:hover{background:#DDE4F4}
+  .inst{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.2rem}
+  footer{background:var(--ink);color:#C2C9DE;border:none;padding:clamp(2.6rem,5vw,3.6rem) 0 2rem}
+  .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:var(--gap)}
+  @media(max-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+  footer h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan-soft);margin:0 0 .9rem;font-weight:600}
+  footer a{color:#C2C9DE;text-decoration:none;font-size:.92rem}footer a:hover,footer a:focus-visible{color:#fff;text-decoration:underline}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem}
+  .countries li{display:flex;align-items:center;gap:.55ch}
+  .countries .dot{font-family:var(--mono);font-size:.7rem;color:#6E77A0}.countries .live{color:var(--cyan-soft)}
+  .countries .soon{opacity:.55;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+  .flogo svg{height:30px;width:auto;display:block;margin-bottom:.2rem}
+  .ftag{color:#9AA3C6;font-size:.92rem;margin-top:.7rem;max-width:34ch}
+  .fbase{margin-top:2.4rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:space-between;font-family:var(--mono);font-size:.72rem;color:#7E87AE;letter-spacing:.04em}
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+  :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+</style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="/">
-      <img src="/assets/logo.svg" alt="LedeLab Group" />
-    </a>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="/leonardo" data-en="Founder" data-es="Fundador">Founder</a></li>
-        <li><a href="https://be360.app">be360</a></li>
-        <li><a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto">Contact</a></li>
-      </ul>
-      <div class="nav-controls">
-        <button class="ctrl-btn" id="langBtn" onclick="toggleLang()">ES</button>
-        <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">☀</button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <p class="hero-eyebrow"
-      data-en="Deep-tech venture studio · Tallinn, Estonia"
-      data-es="Estudio de ventures deep-tech · Tallin, Estonia">
-      Deep-tech venture studio · Tallinn, Estonia
-    </p>
-    <h1
-      data-en="Building technology that <em>changes behaviour,</em> not just measures it."
-      data-es="Construimos tecnología que <em>transforma conductas,</em> no solo las mide.">
-      Building technology that <em>changes behaviour,</em> not just measures it.
-    </h1>
-    <p class="hero-body"
-      data-en="LedeLab Group OÜ develops AI-driven platforms at the intersection of health, education, and behaviour science. We design interventions that work in the real world — schools, families, communities — and measure what actually matters."
-      data-es="LedeLab Group OÜ desarrolla plataformas con IA en la intersección de salud, educación y ciencias del comportamiento. Diseñamos intervenciones que funcionan en el mundo real — colegios, familias, comunidades — y medimos lo que realmente importa.">
-      LedeLab Group OÜ develops AI-driven platforms at the intersection of health, education, and behaviour science. We design interventions that work in the real world — schools, families, communities — and measure what actually matters.
-    </p>
-  </section>
-
-  <hr class="divider" />
-
-  <!-- VENTURES -->
-  <section class="section">
-    <p class="section-label" data-en="Portfolio" data-es="Portafolio">Portfolio</p>
-    <div class="ventures">
-
-      <a class="venture" href="https://be360.app">
-  <span class="venture-num">01</span>
-  <span class="venture-name">be360</span>
-  <span class="venture-desc"
-    data-en="AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI."
-    data-es="Intervención conductual preventiva basada en evidencia para niños y adolescentes en colegios. Reduce factores inflamatorios modificables — entregada mediante IA conversacional.">
-    AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI.
-  </span>
-  <span class="venture-link">be360.app ↗</span>
-</a>
-
-      <div class="venture">
-        <span class="venture-num">02</span>
-        <span class="venture-name">CamIlA · DelaVent</span>
-        <span class="venture-desc"
-          data-en="Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments."
-          data-es="Plataforma de agentes IA para flujos de trabajo comunitarios y empresariales. Inteligencia conversacional modular para entornos de alta confianza.">
-          Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments.
-        </span>
-        <span class="venture-link">EUTM 018568770</span>
-      </div>
-
-      <div class="venture">
-        <span class="venture-num">03</span>
-        <span class="venture-name">Protemad</span>
-        <span class="venture-desc"
-          data-en="Family-led biotechnology company founded in 1994. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets for over 30 years."
-          data-es="Empresa de biotecnología familiar fundada en 1994. Tratamientos ecofúngicos y aditivos biocidas para madera, construcción y agricultura — validados en LATAM por más de 30 años.">
-          Family-led biotechnology company founded in 1994. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets for over 30 years.
-        </span>
-        <span class="venture-link">Barranquilla · Miami</span>
-      </div>
-
-      <div class="venture">
-        <span class="venture-num">04</span>
-        <span class="venture-name">ADIMAT · I+DE</span>
-        <span class="venture-desc"
-          data-en="R&amp;D company for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad's product line. MSc-level chemistry research, Barranquilla."
-          data-es="Empresa de I+D en bioprotección sostenible. Tecnología química y aditivos biocidas para madera, construcción y agricultura — el motor de innovación detrás de la línea de productos Protemad. Investigación química de nivel MSc, Barranquilla.">
-          R&amp;D company for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad's product line. MSc-level chemistry research, Barranquilla.
-        </span>
-        <span class="venture-link">imasde.co ↗</span>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- EIC BADGE — azul estonio -->
-  <div class="eic-strip">
-    <span class="eic-badge">EIC Accelerator · Sept 2026</span>
-    <span class="eic-text"
-      data-en="Applicant — European Innovation Council · up to €2.5M"
-      data-es="Aplicante — Consejo Europeo de Innovación · hasta €2.5M">
-      Applicant — European Innovation Council · up to €2.5M
-    </span>
-  </div>
-
-  <hr class="divider" />
-
-  <!-- FOUNDER -->
-  <div class="founder-strip">
-    <div class="founder-info">
-      <span class="founder-name">Leonardo De la Hoz Borrego</span>
-      <span class="founder-sub"
-        data-en="Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia"
-        data-es="Fundador · MBA Bolonia · MA EdTech Tartu · e-Residente Estonia">
-        Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia
+<!-- Mismo cabezal que las ediciones; wordmark + etiqueta + toggle EN/ES -->
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="LedeLab Group">
+      <span class="logo">
+        <svg viewBox="0 4 65 17" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ledelab">
+          <defs><linearGradient id="wm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2d388a"/><stop offset="1" stop-color="#00aeef"/></linearGradient></defs>
+          <path fill="url(#wm)" d="M3.82 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M15.45 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M8.47 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M16.08 15.08 c0 -2.92 1.92 -5.1 4.82 -5.1 c0.64 0 1.9 0.34 2.24 0.82 l0 -5.32 l2.98 0 l0 14.52 l-2.98 0 l0 -0.66 c-0.36 0.46 -1.38 0.82 -2.04 0.82 c-2.9 0 -5.02 -2.16 -5.02 -5.08 z M19.06 15.08 c0 1.56 1 2.84 2.24 2.84 c1.36 0 2.24 -1.52 2.24 -2.84 s-0.86 -2.86 -2.24 -2.86 c-1.24 0 -2.24 1.28 -2.24 2.86 z M37.42 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M30.44 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M41.43 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M45.50 13.04 l-2.2 -1.26 c1.1 -1.24 2.58 -1.82 4.12 -1.82 c2.96 0 4.16 1.62 4.16 3.14 l0 6.9 l-2.96 0 l0 -0.7 c-0.46 0.48 -1.28 0.84 -2.2 0.84 c-2.7 0 -3.74 -1.2 -3.74 -3.04 c0 -2.08 1.68 -3.48 4.4 -3.48 l1.54 0 c0 -0.74 -0.56 -1.22 -1.4 -1.22 c-0.86 0 -1.28 0.16 -1.72 0.64 z M48.62 16.74 l0 -0.88 l-1.74 0 c-0.78 0 -1.36 0.54 -1.24 1.3 c0.08 0.54 0.56 0.76 1.24 0.76 c1.3 0 1.74 -0.74 1.74 -1.18 z M58.57 9.98 c2.9 0 4.82 2.18 4.82 5.1 s-2.12 5.08 -5.02 5.08 c-0.64 0 -1.72 -0.36 -2.04 -0.82 l0 0.66 l-2.96 0 l0 -14.52 l2.96 0 l0 5.34 c0.34 -0.5 1.62 -0.84 2.24 -0.84 z M58.17 17.92 c1.24 0 2.26 -1.28 2.26 -2.84 c0 -1.58 -1.02 -2.86 -2.26 -2.86 c-1.36 0 -2.24 1.54 -2.24 2.86 s0.9 2.84 2.24 2.84 z"/>
+        </svg>
       </span>
+      <span class="edition"><span class="pub" data-en="Venture Studio" data-es="Estudio de Ventures">Venture Studio</span><span class="cc">OÜ</span></span>
+    </a>
+    <div class="right">
+      <nav class="main" id="nav">
+        <a href="#corridor" data-en="Corridor" data-es="Corredor">Corridor</a>
+        <a href="#ventures" data-en="Ventures" data-es="Ventures">Ventures</a>
+        <a href="#newsroom" data-en="Newsroom" data-es="Redacción">Newsroom</a>
+        <a href="/leonardo" data-en="Founder" data-es="Fundador">Founder</a>
+      </nav>
+      <button class="ctrl" id="langBtn" onclick="toggleLang()">ES</button>
+      <button class="navbtn" id="navbtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">≡</button>
     </div>
-    <a class="founder-cta" href="/leonardo" data-en="Full profile →" data-es="Ver perfil →">Full profile →</a>
   </div>
+</header>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-left">LedeLab Group OÜ · Registry 14513358 · Tallinn, EE · © 2026</span>
-    <ul class="footer-links">
-      <li><a href="https://www.linkedin.com/company/ledelab">LinkedIn · LedeLab</a></li>
-      <li><a href="https://www.linkedin.com/in/leonardodelahoz">LinkedIn · Leonardo</a></li>
-      <li><a href="mailto:leonardo@ledelab.group">leonardo@ledelab.group</a></li>
-    </ul>
-  </footer>
+<main>
+  <!-- HERO -->
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <p class="kicker rv" data-en="Deep-tech venture studio · Tallinn, Estonia" data-es="Estudio de ventures deep-tech · Tallin, Estonia">Deep-tech venture studio · Tallinn, Estonia</p>
+      <h1 class="rv"
+        data-en="A venture studio operating the <em>Estonia–Latin America</em> corridor."
+        data-es="Un estudio de ventures que opera el corredor <em>Estonia–Latinoamérica</em>.">
+        A venture studio operating the <em>Estonia–Latin America</em> corridor.
+      </h1>
+      <p class="lede rv"
+        data-en="LedeLab Group builds AI-driven platforms for health, education and behaviour change — research-grounded, proven in the real world, and bridging Estonia’s digital-nation infrastructure with the talent and markets of Latin America."
+        data-es="LedeLab Group construye plataformas con IA para salud, educación y cambio de hábitos — con base en investigación, probadas en el mundo real, y que conectan la infraestructura de nación digital de Estonia con el talento y los mercados de Latinoamérica.">
+        LedeLab Group builds AI-driven platforms for health, education and behaviour change — research-grounded, proven in the real world, and bridging Estonia’s digital-nation infrastructure with the talent and markets of Latin America.
+      </p>
+      <div class="method rv">
+        <span class="lbl" data-en="Our model" data-es="Nuestro modelo">Our model</span>
+        <span class="tag tag--src" data-en="Estonia ↔ LatAm" data-es="Estonia ↔ LatAm">Estonia ↔ LatAm</span>
+        <span class="tag" data-en="Health · Education · Behaviour" data-es="Salud · Educación · Hábitos">Health · Education · Behaviour</span>
+        <span class="tag tag--ver" data-en="Research-grounded" data-es="Con base científica">Research-grounded</span>
+        <span class="tag" data-en="Asset-light" data-es="Asset-light">Asset-light</span>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // ── THEME ──
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const savedTheme = localStorage.getItem('ll-theme') || 'dark';
-    if (savedTheme === 'light') { root.classList.add('light'); themeBtn.textContent = '☾'; }
+  <!-- 01 · CORREDOR (la tesis) — bloque oscuro idéntico al de las ediciones -->
+  <section id="corridor" class="corridor">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">01</span> <span data-en="The thesis" data-es="La tesis">The thesis</span> <span class="feeds" data-en="→ the spine of everything we build" data-es="→ la columna de todo lo que construimos">→ the spine of everything we build</span></p>
+      <h2 data-en="Why Estonia ↔ Latin America." data-es="Por qué Estonia ↔ Latinoamérica.">Why Estonia ↔ Latin America.</h2>
+      <p class="desc"
+        data-en="Estonia pioneered the digital state — e-Residency, e-government, a clean gateway into the EU. Latin America has the talent, the markets and the urgency. Few operators sit credibly at both ends. We do: Estonian infrastructure as the backbone, Latin American roots as the engine."
+        data-es="Estonia fue pionera del Estado digital — e-Residency, e-gobierno, una puerta limpia a la UE. Latinoamérica tiene el talento, los mercados y la urgencia. Pocos operan con credibilidad en ambos extremos. Nosotros sí: la infraestructura estonia como columna, la raíz latinoamericana como motor.">
+        Estonia pioneered the digital state — e-Residency, e-government, a clean gateway into the EU. Latin America has the talent, the markets and the urgency. Few operators sit credibly at both ends. We do: Estonian infrastructure as the backbone, Latin American roots as the engine.
+      </p>
+      <div class="flow">
+        <span data-en="Estonia · digital state" data-es="Estonia · Estado digital">Estonia · digital state</span><span class="arr">→</span>
+        <span data-en="EU gateway" data-es="puerta a la UE">EU gateway</span><span class="arr">→</span>
+        <span data-en="LatAm talent &amp; markets" data-es="talento y mercados LatAm">LatAm talent &amp; markets</span><span class="arr">→</span>
+        <span data-en="Ventures that change behaviour" data-es="ventures que cambian conductas">Ventures that change behaviour</span>
+      </div>
+      <a class="btn btn--brand" href="#newsroom" data-en="See the editorial network" data-es="Ver la red editorial">See the editorial network</a>
+    </div>
+  </section>
 
-    function toggleTheme() {
-      const isLight = root.classList.toggle('light');
-      themeBtn.textContent = isLight ? '☾' : '☀';
-      localStorage.setItem('ll-theme', isLight ? 'light' : 'dark');
-    }
+  <!-- 02 · VENTURES -->
+  <section id="ventures">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">02</span> <span data-en="What we build" data-es="Lo que construimos">What we build</span></p>
+        <h2 data-en="Ventures, grounded in research." data-es="Ventures, con base en investigación.">Ventures, grounded in research.</h2>
+        <p class="desc" data-en="We don’t build AI for selling’s sake. We design interventions that change behaviour — in health, education and beyond — and measure what actually matters." data-es="No construimos IA por vender. Diseñamos intervenciones que cambian conductas — en salud, educación y más — y medimos lo que de verdad importa.">We don’t build AI for selling’s sake. We design interventions that change behaviour — in health, education and beyond — and measure what actually matters.</p>
+      </div>
+      <div class="items">
+        <div class="item rv">
+          <div class="meta"><span class="tag">01</span><span class="tag tag--src">Health · AI</span></div>
+          <a class="t" href="https://be360.app"><h3>be360</h3></a>
+          <p data-en="AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI." data-es="Intervención conductual preventiva basada en evidencia para niños y adolescentes en colegios. Reduce factores inflamatorios modificables — entregada mediante IA conversacional.">AI-powered behavioural health intervention for children and adolescents in educational settings. Evidence-based protocol to reduce modifiable inflammatory risk factors — delivered via conversational AI.</p>
+          <span class="lk">be360.app ↗</span>
+        </div>
+        <div class="item rv">
+          <div class="meta"><span class="tag">02</span><span class="tag">AI agents</span></div>
+          <h3>CamIlA · DelaVent</h3>
+          <p data-en="Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments." data-es="Plataforma de agentes IA para flujos de trabajo comunitarios y empresariales. Inteligencia conversacional modular para entornos de alta confianza.">Standalone AI agent platform for community and enterprise workflows. Modular conversational intelligence designed for high-context, high-trust environments.</p>
+          <span class="lk">EUTM 018568770</span>
+        </div>
+        <div class="item rv">
+          <div class="meta"><span class="tag">03</span><span class="tag">Biotech · Materials</span></div>
+          <h3>Protemad</h3>
+          <p data-en="Family-led biotechnology company founded in 1994. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets for over 30 years." data-es="Empresa de biotecnología familiar fundada en 1994. Tratamientos ecofúngicos y aditivos biocidas para madera, construcción y agricultura — validados en LATAM por más de 30 años.">Family-led biotechnology company founded in 1994. Eco-fungal treatments and biocidal additives for wood, construction, and agriculture — validated across LATAM markets for over 30 years.</p>
+          <span class="lk">Barranquilla · Miami</span>
+        </div>
+        <div class="item rv">
+          <div class="meta"><span class="tag">04</span><span class="tag">R&amp;D</span></div>
+          <a class="t" href="https://imasde.co"><h3>ADIMAT · I+DE</h3></a>
+          <p data-en="R&amp;D company for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad’s product line. MSc-level chemistry research, Barranquilla." data-es="Empresa de I+D en bioprotección sostenible. Tecnología química y aditivos biocidas para madera, construcción y agricultura — el motor de innovación detrás de la línea Protemad. Investigación química de nivel MSc, Barranquilla.">R&amp;D company for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad’s product line. MSc-level chemistry research, Barranquilla.</p>
+          <span class="lk">imasde.co ↗</span>
+        </div>
+      </div>
+      <div class="cta rv">
+        <p class="grow"><strong data-en="EIC Accelerator · Sept 2026" data-es="EIC Accelerator · Sept 2026">EIC Accelerator · Sept 2026</strong> <span data-en="— applicant, European Innovation Council · up to €2.5M" data-es="— aplicante, Consejo Europeo de Innovación · hasta €2.5M">— applicant, European Innovation Council · up to €2.5M</span></p>
+      </div>
+    </div>
+  </section>
 
-    // ── LANG — botón único muestra el idioma disponible ──
-    const langBtn = document.getElementById('langBtn');
-    let currentLang = localStorage.getItem('ll-lang') || 'en';
-    if (currentLang === 'es') applyLang('es');
+  <!-- 03 · NEWSROOM (red editorial → ediciones) -->
+  <section id="newsroom">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">03</span> <span data-en="Newsroom" data-es="Sala de redacción">Newsroom</span> <span class="feeds" data-en="→ the audience engine" data-es="→ el motor de audiencia">→ the audience engine</span></p>
+        <h2 data-en="The editorial network that feeds the studio." data-es="La red editorial que alimenta el estudio.">The editorial network that feeds the studio.</h2>
+        <p class="desc" data-en="Verified, non-partisan publications in each market — one method, local editions." data-es="Publicaciones verificadas y sin sesgo en cada mercado — un método, ediciones locales.">Verified, non-partisan publications in each market — one method, local editions.</p>
+      </div>
+      <div class="items">
+        <div class="item rv">
+          <div class="meta"><span class="tag tag--src">CO</span><span class="tag">Noticias Neutrales</span></div>
+          <a class="t" href="https://ledelab.co"><h3>Colombia</h3></a>
+          <p data-en="Materials &amp; sustainability, education with technology, sustainable health, and the Estonia–LatAm corridor." data-es="Materiales y sostenibilidad, educación con tecnología, salud sostenible y el corredor Estonia–LatAm.">Materials &amp; sustainability, education with technology, sustainable health, and the Estonia–LatAm corridor.</p>
+          <span class="lk">ledelab.co ↗</span>
+        </div>
+        <div class="item rv">
+          <div class="meta"><span class="tag tag--src">EE</span><span class="tag">Neutral News</span></div>
+          <a class="t" href="https://ledelab.ee"><h3>Estonia</h3></a>
+          <p data-en="The Estonia–LatAm corridor and education with technology — for founders building between the two regions." data-es="El corredor Estonia–LatAm y la educación con tecnología — para fundadores que construyen entre ambas regiones.">The Estonia–LatAm corridor and education with technology — for founders building between the two regions.</p>
+          <span class="lk">ledelab.ee ↗</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    function toggleLang() {
-      currentLang = currentLang === 'en' ? 'es' : 'en';
-      localStorage.setItem('ll-lang', currentLang);
-      applyLang(currentLang);
-    }
+  <!-- 04 · INSTITUCIONAL + FOUNDER -->
+  <section id="founder">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">04</span> <span data-en="Built in Estonia" data-es="Hecho en Estonia">Built in Estonia</span></p>
+      </div>
+      <div class="inst rv">
+        <span class="tag tag--src">LedeLab Group OÜ — Tallinn · Reg. 14513358</span>
+        <span class="tag" data-en="Operated via e-Residency" data-es="Operado vía e-Residency">Operated via e-Residency</span>
+        <span class="tag" data-en="Non-profit research arm" data-es="Brazo de investigación sin fines de lucro">Non-profit research arm</span>
+      </div>
+      <div class="cta rv">
+        <p class="grow"><strong>Leonardo De la Hoz Borrego</strong><br>
+          <span style="color:var(--muted);font-size:.92rem" data-en="Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia" data-es="Fundador · MBA Bolonia · MA EdTech Tartu · e-Residente Estonia">Founder · MBA Bologna · MA EdTech Tartu · e-Resident Estonia</span>
+        </p>
+        <a class="btn btn--brand" href="/leonardo" data-en="Full profile →" data-es="Ver perfil →">Full profile →</a>
+      </div>
+    </div>
+  </section>
+</main>
 
-    function applyLang(lang) {
-      langBtn.textContent = lang === 'en' ? 'ES' : 'EN';
-      document.querySelectorAll('[data-en]').forEach(el => {
-        el.innerHTML = el.dataset[lang] || el.dataset.en;
-      });
-    }
-  </script>
+<!-- Footer hub-and-spoke — mismo formato que las ediciones -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <span class="flogo">
+          <svg viewBox="0 4 65 17" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ledelab">
+            <path fill="#E7ECF7" d="M3.82 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M15.45 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M8.47 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M16.08 15.08 c0 -2.92 1.92 -5.1 4.82 -5.1 c0.64 0 1.9 0.34 2.24 0.82 l0 -5.32 l2.98 0 l0 14.52 l-2.98 0 l0 -0.66 c-0.36 0.46 -1.38 0.82 -2.04 0.82 c-2.9 0 -5.02 -2.16 -5.02 -5.08 z M19.06 15.08 c0 1.56 1 2.84 2.24 2.84 c1.36 0 2.24 -1.52 2.24 -2.84 s-0.86 -2.86 -2.24 -2.86 c-1.24 0 -2.24 1.28 -2.24 2.86 z M37.42 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M30.44 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M41.43 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M45.50 13.04 l-2.2 -1.26 c1.1 -1.24 2.58 -1.82 4.12 -1.82 c2.96 0 4.16 1.62 4.16 3.14 l0 6.9 l-2.96 0 l0 -0.7 c-0.46 0.48 -1.28 0.84 -2.2 0.84 c-2.7 0 -3.74 -1.2 -3.74 -3.04 c0 -2.08 1.68 -3.48 4.4 -3.48 l1.54 0 c0 -0.74 -0.56 -1.22 -1.4 -1.22 c-0.86 0 -1.28 0.16 -1.72 0.64 z M48.62 16.74 l0 -0.88 l-1.74 0 c-0.78 0 -1.36 0.54 -1.24 1.3 c0.08 0.54 0.56 0.76 1.24 0.76 c1.3 0 1.74 -0.74 1.74 -1.18 z M58.57 9.98 c2.9 0 4.82 2.18 4.82 5.1 s-2.12 5.08 -5.02 5.08 c-0.64 0 -1.72 -0.36 -2.04 -0.82 l0 0.66 l-2.96 0 l0 -14.52 l2.96 0 l0 5.34 c0.34 -0.5 1.62 -0.84 2.24 -0.84 z M58.17 17.92 c1.24 0 2.26 -1.28 2.26 -2.84 c0 -1.58 -1.02 -2.86 -2.26 -2.86 c-1.36 0 -2.24 1.54 -2.24 2.86 s0.9 2.84 2.24 2.84 z"/>
+          </svg>
+        </span>
+        <p class="ftag" data-en="Deep-tech venture studio operating the Estonia–Latin America corridor. The editorial network is its audience engine." data-es="Estudio de ventures deep-tech que opera el corredor Estonia–Latinoamérica. La red editorial es su motor de audiencia.">Deep-tech venture studio operating the Estonia–Latin America corridor. The editorial network is its audience engine.</p>
+      </div>
+      <div>
+        <h4 data-en="The studio" data-es="El estudio">The studio</h4>
+        <ul>
+          <li><a href="#corridor" data-en="The corridor" data-es="El corredor">The corridor</a></li>
+          <li><a href="#ventures" data-en="Ventures" data-es="Ventures">Ventures</a></li>
+          <li><a href="#newsroom" data-en="Newsroom" data-es="Redacción">Newsroom</a></li>
+          <li><a href="/leonardo" data-en="Founder" data-es="Fundador">Founder</a></li>
+          <li><a href="mailto:leonardo@ledelab.group" data-en="Contact" data-es="Contacto">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Country editions" data-es="Ediciones por país">Country editions</h4>
+        <ul class="countries">
+          <li><span class="dot live">●</span><a href="https://ledelab.co">Colombia · ledelab.co</a></li>
+          <li><span class="dot live">●</span><a href="https://ledelab.ee">Estonia · ledelab.ee</a></li>
+          <li><span class="dot">○</span><span>Mexico</span> <span class="soon">soon</span></li>
+          <li><span class="dot">○</span><span>Poland</span> <span class="soon">soon</span></li>
+          <li><span class="dot">○</span><span>Ecuador</span> <span class="soon">soon</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbase">
+      <span>© 2026 LedeLab Group OÜ · Registry 14513358 · Tallinn, EE</span>
+      <span><a href="https://www.linkedin.com/company/ledelab">LinkedIn</a> · leonardo@ledelab.group</span>
+    </div>
+  </div>
+</footer>
 
+<script>
+  // nav móvil
+  var btn=document.getElementById('navbtn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',open);});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A')nav.classList.remove('open')});
+  // reveal on scroll
+  var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=document.querySelectorAll('.rv');
+  if(rm||!('IntersectionObserver'in window)){els.forEach(function(el){el.classList.add('in')});}
+  else{var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});els.forEach(function(el){io.observe(el)});}
+  // toggle EN/ES (localStorage seguro para no romper la previsualización)
+  function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  var langBtn=document.getElementById('langBtn');
+  var currentLang=lsGet('ll-lang')||'en';
+  if(currentLang==='es')applyLang('es');
+  function toggleLang(){currentLang=currentLang==='en'?'es':'en';lsSet('ll-lang',currentLang);applyLang(currentLang);}
+  function applyLang(lang){
+    langBtn.textContent=lang==='en'?'ES':'EN';
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(function(el){el.innerHTML=el.dataset[lang]||el.dataset.en;});
+  }
+</script>
 </body>
 </html>

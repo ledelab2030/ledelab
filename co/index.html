@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LedeLab Colombia S.A.S. · LedeLab Group</title>
+<meta name="description" content="LedeLab Colombia S.A.S. — the Colombian affiliate of LedeLab Group OÜ, operating the ADIMAT brand. Barranquilla, Colombia.">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="canonical" href="https://ledelab.group/co">
+<meta property="og:title" content="LedeLab Colombia S.A.S.">
+<meta property="og:description" content="The Colombian affiliate of LedeLab Group OÜ, operating the ADIMAT brand.">
+<meta property="og:url" content="https://ledelab.group/co">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===== SISTEMA COMPARTIDO — idéntico al de ledelab.group ===== */
+  :root{
+    --ink:#172145;--ink-2:#0E1530;--paper:#F4F6FA;--card:#FFFFFF;
+    --navy:#2D388A;--navy-deep:#222B6B;--cyan:#00AEEF;--cyan-soft:#5BD0F5;
+    --amber:#C2792B;--muted:#5B6480;--line:#DCE1EC;--line-soft:#E7EBF3;
+    --serif:'Newsreader',Georgia,'Times New Roman',serif;
+    --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1120px;--gap:clamp(1.1rem,2.4vw,2rem);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.5rem)}
+  .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;display:inline-flex;align-items:center;gap:.4em;border:1px solid var(--line);border-radius:2px;padding:.28em .55em;color:var(--muted);background:var(--card);white-space:nowrap}
+  .tag--src{color:var(--navy);border-color:rgba(45,56,138,.35)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:.7ch;flex-wrap:wrap}
+  .eyebrow .num{color:var(--ink);opacity:.45}.eyebrow .feeds{color:var(--muted);font-weight:400}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;margin:0}
+  h1{font-size:clamp(2.1rem,5.4vw,3.5rem);line-height:1.04}
+  h2{font-size:clamp(1.5rem,3vw,2.05rem);line-height:1.1}
+  h3{font-size:1.2rem;line-height:1.22}p{margin:0}
+  header{position:sticky;top:0;z-index:50;background:rgba(244,246,250,.86);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px}
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+  .logo svg{height:26px;width:auto;display:block}
+  .edition{display:flex;align-items:center;gap:.5ch;padding-left:.7rem;border-left:1px solid var(--line)}
+  .edition .pub{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .edition .cc{font-family:var(--mono);font-size:.58rem;font-weight:600;letter-spacing:.06em;color:#fff;background:var(--navy);border-radius:2px;padding:.18em .42em}
+  .right{display:flex;align-items:center;gap:1rem}
+  nav.main{display:flex;align-items:center;gap:1.5rem}
+  nav.main a{font-size:.92rem;text-decoration:none;color:var(--ink);font-weight:500;opacity:.82}
+  nav.main a:hover,nav.main a:focus-visible{opacity:1;color:var(--navy)}
+  .ctrl{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--muted);background:none;border:1px solid var(--line);border-radius:3px;padding:.34rem .55rem;cursor:pointer;line-height:1}
+  .ctrl:hover{color:var(--navy);border-color:var(--navy)}
+  .navbtn{display:none;background:none;border:1px solid var(--line);border-radius:4px;width:40px;height:36px;cursor:pointer;color:var(--ink)}
+  @media(max-width:880px){nav.main{position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:flex-start;gap:.2rem;background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem 0;display:none}nav.main.open{display:flex}nav.main a{padding:.7rem clamp(1.1rem,4vw,2.5rem);width:100%}.navbtn{display:inline-flex;align-items:center;justify-content:center}}
+  @media(max-width:520px){.edition .pub{display:none}}
+  .hero{padding:clamp(3rem,8vw,6rem) 0 clamp(2rem,5vw,3.5rem)}
+  .hero .kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:1.4rem}
+  .hero h1 em{font-style:italic;color:var(--navy)}
+  .hero .lede{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--muted);max-width:60ch;margin-top:1.4rem}
+  .method{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem;align-items:center}
+  .method .lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);opacity:.5;margin-right:.2rem}
+  section{padding:clamp(2.4rem,5vw,4rem) 0;border-top:1px solid var(--line-soft)}
+  .sec-head{display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.8rem;max-width:62ch}
+  .sec-head .desc{color:var(--muted);font-size:1.02rem}
+  .items{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gap);margin-top:1.8rem}
+  @media(max-width:680px){.items{grid-template-columns:1fr}}
+  .item{border-top:1px solid var(--line);padding-top:1rem;display:flex;flex-direction:column;gap:.55rem}
+  .item h3{font-weight:600}.item .meta{display:flex;flex-wrap:wrap;gap:.35rem}
+  .item a.t{text-decoration:none}.item a.t:hover h3,.item a.t:focus-visible h3{color:var(--navy)}
+  .item p{color:var(--muted);font-size:.95rem}
+  .item .lk{font-family:var(--mono);font-size:.7rem;color:var(--navy);letter-spacing:.05em;margin-top:.15rem}
+  .cta{margin-top:1.9rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.3rem}
+  .cta p{font-size:.97rem}.cta strong{font-weight:600}.cta .grow{flex:1;min-width:220px}
+  .btn{font-family:var(--sans);font-weight:600;font-size:.9rem;text-decoration:none;border-radius:5px;padding:.62rem 1.1rem;display:inline-block;border:1px solid transparent;white-space:nowrap;cursor:pointer}
+  .btn--brand{background:var(--navy);color:#fff}.btn--brand:hover,.btn--brand:focus-visible{background:var(--navy-deep)}
+  .btn--ghost{border-color:var(--ink);color:var(--ink);background:transparent}.btn--ghost:hover,.btn--ghost:focus-visible{background:var(--ink);color:#fff}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.3rem;margin-top:1.8rem}
+  .note p{color:var(--muted);font-size:.94rem;line-height:1.6}
+  .note p+p{margin-top:.6rem}
+  .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem var(--gap);margin-top:1.8rem}
+  @media(max-width:680px){.facts{grid-template-columns:1fr}}
+  .fact dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .fact dd{margin:.3rem 0 0;font-size:1rem}
+  footer{background:var(--ink);color:#C2C9DE;border:none;padding:clamp(2.2rem,5vw,3rem) 0 2rem}
+  footer a{color:#C2C9DE;text-decoration:none;font-size:.92rem}footer a:hover,footer a:focus-visible{color:#fff;text-decoration:underline}
+  .fbase{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:space-between;font-family:var(--mono);font-size:.72rem;color:#7E87AE;letter-spacing:.04em}
+  .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+  :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="LedeLab Group">
+      <span class="logo">
+        <svg viewBox="0 4 65 17" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ledelab">
+          <defs><linearGradient id="wm" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2d388a"/><stop offset="1" stop-color="#00aeef"/></linearGradient></defs>
+          <path fill="url(#wm)" d="M3.82 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M15.45 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M8.47 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M16.08 15.08 c0 -2.92 1.92 -5.1 4.82 -5.1 c0.64 0 1.9 0.34 2.24 0.82 l0 -5.32 l2.98 0 l0 14.52 l-2.98 0 l0 -0.66 c-0.36 0.46 -1.38 0.82 -2.04 0.82 c-2.9 0 -5.02 -2.16 -5.02 -5.08 z M19.06 15.08 c0 1.56 1 2.84 2.24 2.84 c1.36 0 2.24 -1.52 2.24 -2.84 s-0.86 -2.86 -2.24 -2.86 c-1.24 0 -2.24 1.28 -2.24 2.86 z M37.42 15.08 l0 0.66 l-7.04 0 c0 1.16 1.18 1.98 2.16 1.98 c0.96 0 1.84 -0.38 2.3 -1.22 l1.98 1.82 c-0.8 1.08 -2.02 1.84 -4.28 1.84 c-3.24 0 -5.22 -2.16 -5.22 -5.08 s1.92 -5.1 5.04 -5.1 s5.06 2.14 5.06 5.1 z M30.44 13.86 l3.88 0 c-0.16 -0.94 -0.84 -1.44 -1.96 -1.44 c-1.08 0 -1.74 0.58 -1.92 1.44 z M41.43 5.12 l0 14.88 l-2.98 0 l0 -14.88 l2.98 0 z M45.50 13.04 l-2.2 -1.26 c1.1 -1.24 2.58 -1.82 4.12 -1.82 c2.96 0 4.16 1.62 4.16 3.14 l0 6.9 l-2.96 0 l0 -0.7 c-0.46 0.48 -1.28 0.84 -2.2 0.84 c-2.7 0 -3.74 -1.2 -3.74 -3.04 c0 -2.08 1.68 -3.48 4.4 -3.48 l1.54 0 c0 -0.74 -0.56 -1.22 -1.4 -1.22 c-0.86 0 -1.28 0.16 -1.72 0.64 z M48.62 16.74 l0 -0.88 l-1.74 0 c-0.78 0 -1.36 0.54 -1.24 1.3 c0.08 0.54 0.56 0.76 1.24 0.76 c1.3 0 1.74 -0.74 1.74 -1.18 z M58.57 9.98 c2.9 0 4.82 2.18 4.82 5.1 s-2.12 5.08 -5.02 5.08 c-0.64 0 -1.72 -0.36 -2.04 -0.82 l0 0.66 l-2.96 0 l0 -14.52 l2.96 0 l0 5.34 c0.34 -0.5 1.62 -0.84 2.24 -0.84 z M58.17 17.92 c1.24 0 2.26 -1.28 2.26 -2.84 c0 -1.58 -1.02 -2.86 -2.26 -2.86 c-1.36 0 -2.24 1.54 -2.24 2.86 s0.9 2.84 2.24 2.84 z"/>
+        </svg>
+      </span>
+      <span class="edition"><span class="pub" data-en="Colombia" data-es="Colombia">Colombia</span><span class="cc">CO</span></span>
+    </a>
+    <div class="right">
+      <nav class="main" id="nav">
+        <a href="/" data-en="LedeLab Group" data-es="LedeLab Group">LedeLab Group</a>
+        <a href="#adimat" data-en="ADIMAT" data-es="ADIMAT">ADIMAT</a>
+        <a href="mailto:colombia@ledelab.group" data-en="Contact" data-es="Contacto">Contact</a>
+      </nav>
+      <button class="ctrl" id="langBtn" onclick="toggleLang()">ES</button>
+      <button class="navbtn" id="navbtn" aria-label="Menu" aria-expanded="false" aria-controls="nav">≡</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-top:none">
+    <div class="wrap">
+      <p class="kicker rv" data-en="Affiliated company · Barranquilla, Colombia" data-es="Compañía filial · Barranquilla, Colombia">Affiliated company · Barranquilla, Colombia</p>
+      <h1 class="rv" data-en="LedeLab Colombia S.A.S." data-es="LedeLab Colombia S.A.S.">LedeLab Colombia S.A.S.</h1>
+      <p class="lede rv"
+        data-en="The Colombian affiliate of LedeLab Group OÜ (Tallinn, Estonia). Incorporated in Barranquilla, it operates the <strong>ADIMAT</strong> brand — chemical technology and biocidal additives for wood, construction, and agriculture."
+        data-es="La filial colombiana de LedeLab Group OÜ (Tallin, Estonia). Constituida en Barranquilla, opera la marca <strong>ADIMAT</strong> — tecnología química y aditivos biocidas para madera, construcción y agricultura.">
+        The Colombian affiliate of LedeLab Group OÜ (Tallinn, Estonia). Incorporated in Barranquilla, it operates the <strong>ADIMAT</strong> brand — chemical technology and biocidal additives for wood, construction, and agriculture.
+      </p>
+      <div class="method rv">
+        <span class="lbl" data-en="This company" data-es="Esta compañía">This company</span>
+        <span class="tag tag--src">NIT 901.668.620-2</span>
+        <span class="tag" data-en="Barranquilla, Colombia" data-es="Barranquilla, Colombia">Barranquilla, Colombia</span>
+        <span class="tag" data-en="Affiliate of LedeLab Group OÜ" data-es="Filial de LedeLab Group OÜ">Affiliate of LedeLab Group OÜ</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="adimat">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">01</span> <span data-en="What it operates" data-es="Qué opera">What it operates</span></p>
+        <h2 data-en="The ADIMAT brand." data-es="La marca ADIMAT.">The ADIMAT brand.</h2>
+        <p class="desc"
+          data-en="R&amp;D and manufacturing for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad's product line. MSc-level chemistry research, Barranquilla."
+          data-es="I+D y producción en bioprotección sostenible. Tecnología química y aditivos biocidas para madera, construcción y agricultura — el motor de innovación detrás de la línea de productos Protemad. Investigación química de nivel MSc, Barranquilla.">
+          R&amp;D and manufacturing for sustainable bioprotection. Chemical technology and biocidal additives for wood, construction, and agriculture — the innovation engine behind Protemad's product line. MSc-level chemistry research, Barranquilla.
+        </p>
+      </div>
+      <div class="cta rv">
+        <p class="grow">
+          <strong data-en="ADIMAT" data-es="ADIMAT">ADIMAT</strong>
+          <span style="color:var(--muted)" data-en=" — product site, hosted for now at imasde.co." data-es=" — sitio de producto, alojado por ahora en imasde.co."> — product site, hosted for now at imasde.co.</span>
+        </p>
+        <a class="btn btn--brand" href="https://imasde.co" data-en="imasde.co ↗" data-es="imasde.co ↗">imasde.co ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">02</span> <span data-en="Not to be confused with" data-es="No confundir con">Not to be confused with</span></p>
+      </div>
+      <div class="note rv">
+        <p data-en="<strong>ledelab.co</strong> is a different thing: LedeLab's Colombian newsroom edition (Noticias Neutrales), an editorial publication — not this company." data-es="<strong>ledelab.co</strong> es otra cosa: la edición colombiana del newsroom de LedeLab (Noticias Neutrales), una publicación editorial — no esta compañía."><strong>ledelab.co</strong> is a different thing: LedeLab's Colombian newsroom edition (Noticias Neutrales), an editorial publication — not this company.</p>
+        <p data-en="<strong>ADIMAT</strong> is the commercial brand this company operates — see above." data-es="<strong>ADIMAT</strong> es la marca comercial que opera esta compañía — ver arriba."><strong>ADIMAT</strong> is the commercial brand this company operates — see above.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head rv">
+        <p class="eyebrow"><span class="num">03</span> <span data-en="Corporate record" data-es="Registro societario">Corporate record</span></p>
+      </div>
+      <dl class="facts rv">
+        <div class="fact"><dt data-en="Legal name" data-es="Razón social">Legal name</dt><dd>LedeLab Colombia S.A.S.</dd></div>
+        <div class="fact"><dt data-en="Tax ID (NIT)" data-es="NIT">Tax ID (NIT)</dt><dd>901.668.620-2</dd></div>
+        <div class="fact"><dt data-en="Incorporated" data-es="Constitución">Incorporated</dt><dd data-en="January 3, 2023 · Barranquilla" data-es="3 de enero de 2023 · Barranquilla">January 3, 2023 · Barranquilla</dd></div>
+        <div class="fact"><dt data-en="Registry" data-es="Registro">Registry</dt><dd data-en="Chamber of Commerce of Barranquilla · No. 858.156" data-es="Cámara de Comercio de Barranquilla · Matrícula 858.156">Chamber of Commerce of Barranquilla · No. 858.156</dd></div>
+        <div class="fact"><dt data-en="Controlled by" data-es="Controlada por">Controlled by</dt><dd data-en="Leonardo Javier De la Hoz Borrego · 100%" data-es="Leonardo Javier De la Hoz Borrego · 100%">Leonardo Javier De la Hoz Borrego · 100%</dd></div>
+        <div class="fact"><dt data-en="Parent" data-es="Matriz">Parent</dt><dd>LedeLab Group OÜ · Tallinn, Estonia</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbase">
+      <span data-en="© 2026 LedeLab Colombia S.A.S. · NIT 901.668.620-2 · Barranquilla, CO" data-es="© 2026 LedeLab Colombia S.A.S. · NIT 901.668.620-2 · Barranquilla, CO">© 2026 LedeLab Colombia S.A.S. · NIT 901.668.620-2 · Barranquilla, CO</span>
+      <span><a href="/" data-en="LedeLab Group OÜ ↗" data-es="LedeLab Group OÜ ↗">LedeLab Group OÜ ↗</a> · <a href="mailto:colombia@ledelab.group">colombia@ledelab.group</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var btn=document.getElementById('navbtn'),nav=document.getElementById('nav');
+  btn.addEventListener('click',function(){var open=nav.classList.toggle('open');btn.setAttribute('aria-expanded',open);});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A')nav.classList.remove('open')});
+  var rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=document.querySelectorAll('.rv');
+  if(rm||!('IntersectionObserver'in window)){els.forEach(function(el){el.classList.add('in')});}
+  else{var io=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});},{threshold:.14,rootMargin:'0px 0px -8% 0px'});els.forEach(function(el){io.observe(el)});}
+  function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  var langBtn=document.getElementById('langBtn');
+  var currentLang=lsGet('ll-lang')||'en';
+  if(currentLang==='es')applyLang('es');
+  function toggleLang(){currentLang=currentLang==='en'?'es':'en';lsSet('ll-lang',currentLang);applyLang(currentLang);}
+  function applyLang(lang){
+    langBtn.textContent=lang==='en'?'ES':'EN';
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(function(el){el.innerHTML=el.dataset[lang]||el.dataset.en;});
+  }
+</script>
+</body>
+</html>
